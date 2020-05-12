@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Attraction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsOpen" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="IsGoesInside" Type="bit" Nullable="false" />
+          <Property Name="IdEntryGate" Type="int" Nullable="false" />
+          <Property Name="IdWristband" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientTicket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="EntriesLeft" Type="int" />
+          <Property Name="WasPaid" Type="bit" Nullable="false" />
+          <Property Name="ActivationDate" Type="date" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
+          <Property Name="IdTicketInPriceList" Type="int" Nullable="false" />
+          <Property Name="IdWristband" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntryGate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IdAttraction" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketInPriceList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Entries" Type="int" />
+          <Property Name="Duration" Type="date" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="IdAttraction" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wristband">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
+          <End Role="EntryGate" Type="Self.EntryGate" Multiplicity="1" />
+          <End Role="ClientEntry" Type="Self.ClientEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntryGate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientEntry">
+              <PropertyRef Name="IdEntryGate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband">
+          <End Role="Wristband" Type="Self.Wristband" Multiplicity="1" />
+          <End Role="ClientEntry" Type="Self.ClientEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wristband">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientEntry">
+              <PropertyRef Name="IdWristband" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList">
+          <End Role="TicketInPriceList" Type="Self.TicketInPriceList" Multiplicity="1" />
+          <End Role="ClientTicket" Type="Self.ClientTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInPriceList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientTicket">
+              <PropertyRef Name="IdTicketInPriceList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboClientTicket_dbo_ClientTicket_IdWristband">
+          <End Role="Wristband" Type="Self.Wristband" Multiplicity="1" />
+          <End Role="ClientTicket" Type="Self.ClientTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wristband">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientTicket">
+              <PropertyRef Name="IdWristband" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboEntryGate_dbo_EntryGate_IdAttraction">
+          <End Role="Attraction" Type="Self.Attraction" Multiplicity="1" />
+          <End Role="EntryGate" Type="Self.EntryGate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attraction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryGate">
+              <PropertyRef Name="IdAttraction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction">
+          <End Role="Attraction" Type="Self.Attraction" Multiplicity="1" />
+          <End Role="TicketInPriceList" Type="Self.TicketInPriceList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attraction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketInPriceList">
+              <PropertyRef Name="IdAttraction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attraction" EntityType="Self.Attraction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientEntry" EntityType="Self.ClientEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientTicket" EntityType="Self.ClientTicket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntryGate" EntityType="Self.EntryGate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketInPriceList" EntityType="Self.TicketInPriceList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wristband" EntityType="Self.Wristband" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" Association="Self.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
+            <End Role="EntryGate" EntitySet="EntryGate" />
+            <End Role="ClientEntry" EntitySet="ClientEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband" Association="Self.FK_dboClientEntry_dbo_ClientEntry_IdWristband">
+            <End Role="Wristband" EntitySet="Wristband" />
+            <End Role="ClientEntry" EntitySet="ClientEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" Association="Self.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList">
+            <End Role="TicketInPriceList" EntitySet="TicketInPriceList" />
+            <End Role="ClientTicket" EntitySet="ClientTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboClientTicket_dbo_ClientTicket_IdWristband" Association="Self.FK_dboClientTicket_dbo_ClientTicket_IdWristband">
+            <End Role="Wristband" EntitySet="Wristband" />
+            <End Role="ClientTicket" EntitySet="ClientTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboEntryGate_dbo_EntryGate_IdAttraction" Association="Self.FK_dboEntryGate_dbo_EntryGate_IdAttraction">
+            <End Role="Attraction" EntitySet="Attraction" />
+            <End Role="EntryGate" EntitySet="EntryGate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" Association="Self.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction">
+            <End Role="Attraction" EntitySet="Attraction" />
+            <End Role="TicketInPriceList" EntitySet="TicketInPriceList" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Model.AspNetUsers" />
+          <EntitySet Name="Attraction" EntityType="Model.Attraction" />
+          <EntitySet Name="EntryGate" EntityType="Model.EntryGate" />
+          <EntitySet Name="TicketInPriceList" EntityType="Model.TicketInPriceList" />
+          <AssociationSet Name="FK_dboEntryGate_dbo_EntryGate_IdAttraction" Association="Model.FK_dboEntryGate_dbo_EntryGate_IdAttraction">
+            <End Role="Attraction" EntitySet="Attraction" />
+            <End Role="EntryGate" EntitySet="EntryGate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction">
+            <End Role="Attraction" EntitySet="Attraction" />
+            <End Role="TicketInPriceList" EntitySet="TicketInPriceList" />
+          </AssociationSet>
+          <EntitySet Name="ClientEntry" EntityType="Model.ClientEntry" />
+          <EntitySet Name="ClientTicket" EntityType="Model.ClientTicket" />
+          <EntitySet Name="Wristband" EntityType="Model.Wristband" />
+          <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
+            <End Role="EntryGate" EntitySet="EntryGate" />
+            <End Role="ClientEntry" EntitySet="ClientEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband" Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband">
+            <End Role="Wristband" EntitySet="Wristband" />
+            <End Role="ClientEntry" EntitySet="ClientEntry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList">
+            <End Role="TicketInPriceList" EntitySet="TicketInPriceList" />
+            <End Role="ClientTicket" EntitySet="ClientTicket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dboClientTicket_dbo_ClientTicket_IdWristband" Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband">
+            <End Role="Wristband" EntitySet="Wristband" />
+            <End Role="ClientTicket" EntitySet="ClientTicket" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Attraction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="IsOpen" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EntryGate" Relationship="Model.FK_dboEntryGate_dbo_EntryGate_IdAttraction" FromRole="Attraction" ToRole="EntryGate" />
+          <NavigationProperty Name="TicketInPriceList" Relationship="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" FromRole="Attraction" ToRole="TicketInPriceList" />
+        </EntityType>
+        <EntityType Name="EntryGate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IdAttraction" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attraction" Relationship="Model.FK_dboEntryGate_dbo_EntryGate_IdAttraction" FromRole="EntryGate" ToRole="Attraction" />
+          <NavigationProperty Name="ClientEntry" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" FromRole="EntryGate" ToRole="ClientEntry" />
+        </EntityType>
+        <EntityType Name="TicketInPriceList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Entries" Type="Int32" />
+          <Property Name="Duration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="IdAttraction" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Attraction" Relationship="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" FromRole="TicketInPriceList" ToRole="Attraction" />
+          <NavigationProperty Name="ClientTicket" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" FromRole="TicketInPriceList" ToRole="ClientTicket" />
+        </EntityType>
+        <Association Name="FK_dboEntryGate_dbo_EntryGate_IdAttraction">
+          <End Type="Model.Attraction" Role="Attraction" Multiplicity="1" />
+          <End Type="Model.EntryGate" Role="EntryGate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attraction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryGate">
+              <PropertyRef Name="IdAttraction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction">
+          <End Type="Model.Attraction" Role="Attraction" Multiplicity="1" />
+          <End Type="Model.TicketInPriceList" Role="TicketInPriceList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attraction">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TicketInPriceList">
+              <PropertyRef Name="IdAttraction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ClientEntry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsGoesInside" Type="Boolean" Nullable="false" />
+          <Property Name="IdEntryGate" Type="Int32" Nullable="false" />
+          <Property Name="IdWristband" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EntryGate" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" FromRole="ClientEntry" ToRole="EntryGate" />
+          <NavigationProperty Name="Wristband" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" FromRole="ClientEntry" ToRole="Wristband" />
+        </EntityType>
+        <EntityType Name="ClientTicket">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="EntriesLeft" Type="Int32" />
+          <Property Name="WasPaid" Type="Boolean" Nullable="false" />
+          <Property Name="ActivationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdTicketInPriceList" Type="Int32" Nullable="false" />
+          <Property Name="IdWristband" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TicketInPriceList" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" FromRole="ClientTicket" ToRole="TicketInPriceList" />
+          <NavigationProperty Name="Wristband" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" FromRole="ClientTicket" ToRole="Wristband" />
+        </EntityType>
+        <EntityType Name="Wristband">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClientEntry" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" FromRole="Wristband" ToRole="ClientEntry" />
+          <NavigationProperty Name="ClientTicket" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" FromRole="Wristband" ToRole="ClientTicket" />
+        </EntityType>
+        <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
+          <End Type="Model.EntryGate" Role="EntryGate" Multiplicity="1" />
+          <End Type="Model.ClientEntry" Role="ClientEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntryGate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientEntry">
+              <PropertyRef Name="IdEntryGate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband">
+          <End Type="Model.Wristband" Role="Wristband" Multiplicity="1" />
+          <End Type="Model.ClientEntry" Role="ClientEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wristband">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientEntry">
+              <PropertyRef Name="IdWristband" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList">
+          <End Type="Model.TicketInPriceList" Role="TicketInPriceList" Multiplicity="1" />
+          <End Type="Model.ClientTicket" Role="ClientTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketInPriceList">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientTicket">
+              <PropertyRef Name="IdTicketInPriceList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dboClientTicket_dbo_ClientTicket_IdWristband">
+          <End Type="Model.Wristband" Role="Wristband" Multiplicity="1" />
+          <End Type="Model.ClientTicket" Role="ClientTicket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wristband">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientTicket">
+              <PropertyRef Name="IdWristband" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Model.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attraction">
+            <EntityTypeMapping TypeName="Model.Attraction">
+              <MappingFragment StoreEntitySet="Attraction">
+                <ScalarProperty Name="IsOpen" ColumnName="IsOpen" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntryGate">
+            <EntityTypeMapping TypeName="Model.EntryGate">
+              <MappingFragment StoreEntitySet="EntryGate">
+                <ScalarProperty Name="IdAttraction" ColumnName="IdAttraction" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketInPriceList">
+            <EntityTypeMapping TypeName="Model.TicketInPriceList">
+              <MappingFragment StoreEntitySet="TicketInPriceList">
+                <ScalarProperty Name="IdAttraction" ColumnName="IdAttraction" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Entries" ColumnName="Entries" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientEntry">
+            <EntityTypeMapping TypeName="Model.ClientEntry">
+              <MappingFragment StoreEntitySet="ClientEntry">
+                <ScalarProperty Name="IdWristband" ColumnName="IdWristband" />
+                <ScalarProperty Name="IdEntryGate" ColumnName="IdEntryGate" />
+                <ScalarProperty Name="IsGoesInside" ColumnName="IsGoesInside" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientTicket">
+            <EntityTypeMapping TypeName="Model.ClientTicket">
+              <MappingFragment StoreEntitySet="ClientTicket">
+                <ScalarProperty Name="IdWristband" ColumnName="IdWristband" />
+                <ScalarProperty Name="IdTicketInPriceList" ColumnName="IdTicketInPriceList" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+                <ScalarProperty Name="WasPaid" ColumnName="WasPaid" />
+                <ScalarProperty Name="EntriesLeft" ColumnName="EntriesLeft" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wristband">
+            <EntityTypeMapping TypeName="Model.Wristband">
+              <MappingFragment StoreEntitySet="Wristband">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
