@@ -81,7 +81,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="IsUserd" Type="bit" Nullable="false" />
+          <Property Name="IsUsed" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
           <End Role="EntryGate" Type="Self.EntryGate" Multiplicity="1" />
@@ -207,18 +207,18 @@
           </AssociationSet>
           <EntitySet Name="ClientEntry" EntityType="Model.ClientEntry" />
           <EntitySet Name="ClientTicket" EntityType="Model.ClientTicket" />
-          <EntitySet Name="Wristband" EntityType="Model.Wristband" />
           <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
             <End Role="EntryGate" EntitySet="EntryGate" />
-            <End Role="ClientEntry" EntitySet="ClientEntry" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband" Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband">
-            <End Role="Wristband" EntitySet="Wristband" />
             <End Role="ClientEntry" EntitySet="ClientEntry" />
           </AssociationSet>
           <AssociationSet Name="FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList">
             <End Role="TicketInPriceList" EntitySet="TicketInPriceList" />
             <End Role="ClientTicket" EntitySet="ClientTicket" />
+          </AssociationSet>
+          <EntitySet Name="Wristband" EntityType="Model.Wristband" />
+          <AssociationSet Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband" Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband">
+            <End Role="Wristband" EntitySet="Wristband" />
+            <End Role="ClientEntry" EntitySet="ClientEntry" />
           </AssociationSet>
           <AssociationSet Name="FK_dboClientTicket_dbo_ClientTicket_IdWristband" Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband">
             <End Role="Wristband" EntitySet="Wristband" />
@@ -329,16 +329,6 @@
           <NavigationProperty Name="TicketInPriceList" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" FromRole="ClientTicket" ToRole="TicketInPriceList" />
           <NavigationProperty Name="Wristband" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" FromRole="ClientTicket" ToRole="Wristband" />
         </EntityType>
-        <EntityType Name="Wristband">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ClientEntry" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" FromRole="Wristband" ToRole="ClientEntry" />
-          <NavigationProperty Name="ClientTicket" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" FromRole="Wristband" ToRole="ClientTicket" />
-          <Property Name="IsUserd" Type="Boolean" Nullable="false" />
-        </EntityType>
         <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
           <End Type="Model.EntryGate" Role="EntryGate" Multiplicity="1" />
           <End Type="Model.ClientEntry" Role="ClientEntry" Multiplicity="*" />
@@ -351,18 +341,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband">
-          <End Type="Model.Wristband" Role="Wristband" Multiplicity="1" />
-          <End Type="Model.ClientEntry" Role="ClientEntry" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Wristband">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ClientEntry">
-              <PropertyRef Name="IdWristband" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList">
           <End Type="Model.TicketInPriceList" Role="TicketInPriceList" Multiplicity="1" />
           <End Type="Model.ClientTicket" Role="ClientTicket" Multiplicity="*" />
@@ -372,6 +350,28 @@
             </Principal>
             <Dependent Role="ClientTicket">
               <PropertyRef Name="IdTicketInPriceList" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Wristband">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsUsed" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ClientEntry" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" FromRole="Wristband" ToRole="ClientEntry" />
+          <NavigationProperty Name="ClientTicket" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" FromRole="Wristband" ToRole="ClientTicket" />
+        </EntityType>
+        <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdWristband">
+          <End Type="Model.Wristband" Role="Wristband" Multiplicity="1" />
+          <End Type="Model.ClientEntry" Role="ClientEntry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wristband">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientEntry">
+              <PropertyRef Name="IdWristband" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -472,7 +472,7 @@
           <EntitySetMapping Name="Wristband">
             <EntityTypeMapping TypeName="Model.Wristband">
               <MappingFragment StoreEntitySet="Wristband">
-                <ScalarProperty Name="IsUserd" ColumnName="IsUserd" />
+                <ScalarProperty Name="IsUsed" ColumnName="IsUsed" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>

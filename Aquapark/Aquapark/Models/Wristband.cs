@@ -23,7 +23,7 @@ namespace Aquapark.Models
     
         public int Id { get; set; }
         public bool IsActive { get; set; }
-        public bool IsUserd { get; set; }
+        public bool IsUsed { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientEntry> ClientEntry { get; set; }

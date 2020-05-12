@@ -10,6 +10,16 @@ Projekt na bazy danych 2 - System wspomagający pracę aquaparku
 
 ![Screen](documentation/Classes.png)
 
+## Model bazy danych:
+
+![Screen](documentation/DatabaseModel.png)
+
 ## Diagram przypadków użycia:
 
 ![Screen](documentation/UseCase.jpg)
+
+## Przykładowe ekrany aplikacji:
+
+![Screen](documentation/Landing.png)
+![Screen](documentation/Login.png)
+![Screen](documentation/Wristbands.png)
