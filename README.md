@@ -8,7 +8,7 @@ Projekt na bazy danych 2 - System wspomagający pracę aquaparku
 
 ## Diagram klas:
 
-![Screen](documentation/Classes.jpg)
+![Screen](documentation/Classes.png)
 
 ## Diagram przypadków użycia:
 
