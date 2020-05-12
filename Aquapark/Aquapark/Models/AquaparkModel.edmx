@@ -81,6 +81,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsUserd" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
           <End Role="EntryGate" Type="Self.EntryGate" Multiplicity="1" />
@@ -336,6 +337,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ClientEntry" Relationship="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" FromRole="Wristband" ToRole="ClientEntry" />
           <NavigationProperty Name="ClientTicket" Relationship="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" FromRole="Wristband" ToRole="ClientTicket" />
+          <Property Name="IsUserd" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_dboClientEntry_dbo_ClientEntry_IdEntryGate">
           <End Type="Model.EntryGate" Role="EntryGate" Multiplicity="1" />
@@ -470,6 +472,7 @@
           <EntitySetMapping Name="Wristband">
             <EntityTypeMapping TypeName="Model.Wristband">
               <MappingFragment StoreEntitySet="Wristband">
+                <ScalarProperty Name="IsUserd" ColumnName="IsUserd" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
