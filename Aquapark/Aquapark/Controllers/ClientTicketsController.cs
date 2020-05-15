@@ -132,5 +132,98 @@ namespace Aquapark.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
+
+
+        public ActionResult CreateTicket(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            ClientTicket clientTicket = new ClientTicket();
+            clientTicket.IdWristband = id ?? 0;
+
+            if (db.Wristband.Find(clientTicket.IdWristband).IsUsed == false) 
+            {
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name == "Aquapark");
+
+                ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name");
+            }
+            else
+            {
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name != "Aquapark");
+
+                ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name");
+            }
+
+            return View(clientTicket);
+        }
+
+        // POST: ClientTickets/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTicket([Bind(Include = "Id,IsActive,EntriesLeft,WasPaid,ActivationDate,ExpirationDate,IdTicketInPriceList,IdWristband")] ClientTicket clientTicket)
+        {
+            clientTicket.IsActive = true;
+            clientTicket.ActivationDate = DateTime.Now;
+            clientTicket.WasPaid = false;
+
+            clientTicket.EntriesLeft = db.TicketInPriceList.Find(clientTicket.IdTicketInPriceList).Entries;
+            clientTicket.ExpirationDate = clientTicket.ActivationDate;
+            clientTicket.ExpirationDate = clientTicket.ExpirationDate.Add(db.TicketInPriceList.Find(clientTicket.IdTicketInPriceList).Duration);
+
+
+
+            if (ModelState.IsValid)
+            {
+                db.Wristband.Find(clientTicket.IdWristband).IsUsed = true;
+
+                db.ClientTicket.Add(clientTicket);
+                db.SaveChanges();
+                return RedirectToAction("IndexWristband", new { id = clientTicket.IdWristband });
+            }
+
+            //ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id", clientTicket.IdWristband);
+
+            if (db.Wristband.Find(clientTicket.IdWristband).IsUsed == false)
+            {
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name == "Aquapark");
+
+                ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name", clientTicket.IdTicketInPriceList);
+            }
+            else
+            {
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name != "Aquapark");
+
+                ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name", clientTicket.IdTicketInPriceList);
+            }
+
+            return View(clientTicket);
+        }
+
+
+
+
+        // GET: ClientTickets
+        public ActionResult IndexWristband(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            var clientTicket = db.ClientTicket.Include(c => c.Wristband).Include(c => c.TicketInPriceList).Where(n => n.IdWristband == id);
+
+            ViewBag.IdWristband = id;
+
+            return View(clientTicket.ToList());
+        }
     }
 }

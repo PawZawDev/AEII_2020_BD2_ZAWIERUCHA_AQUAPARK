@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ClientTicketsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TicketInPriceListsController.cs" />
     <Compile Include="Controllers\WristbandsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -317,6 +318,13 @@
     <Content Include="Views\ClientTickets\Details.cshtml" />
     <Content Include="Views\ClientTickets\Edit.cshtml" />
     <Content Include="Views\ClientTickets\Index.cshtml" />
+    <Content Include="Views\ClientTickets\CreateTicket.cshtml" />
+    <Content Include="Views\ClientTickets\IndexWristBand.cshtml" />
+    <Content Include="Views\TicketInPriceLists\Create.cshtml" />
+    <Content Include="Views\TicketInPriceLists\Delete.cshtml" />
+    <Content Include="Views\TicketInPriceLists\Details.cshtml" />
+    <Content Include="Views\TicketInPriceLists\Edit.cshtml" />
+    <Content Include="Views\TicketInPriceLists\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
