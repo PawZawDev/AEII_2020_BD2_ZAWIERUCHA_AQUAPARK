@@ -23,7 +23,7 @@ namespace Aquapark.Models
         public int IdTicketInPriceList { get; set; }
         public int IdWristband { get; set; }
     
-        public virtual TicketInPriceList TicketInPriceList { get; set; }
         public virtual Wristband Wristband { get; set; }
+        public virtual TicketInPriceList TicketInPriceList { get; set; }
     }
 }

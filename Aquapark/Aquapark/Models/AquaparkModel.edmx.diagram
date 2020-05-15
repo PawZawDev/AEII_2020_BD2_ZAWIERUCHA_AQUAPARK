@@ -8,16 +8,18 @@
         <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="11.75" PointY="1.75" />
         <EntityTypeShape EntityType="Model.Attraction" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="Model.EntryGate" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="Model.TicketInPriceList" Width="1.5" PointX="3" PointY="3.875" />
         <AssociationConnector Association="Model.FK_dboEntryGate_dbo_EntryGate_IdAttraction" />
-        <AssociationConnector Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" />
         <EntityTypeShape EntityType="Model.ClientEntry" Width="1.5" PointX="7.125" PointY="0.875" />
-        <EntityTypeShape EntityType="Model.ClientTicket" Width="1.5" PointX="7.375" PointY="4.625" />
         <AssociationConnector Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" />
-        <AssociationConnector Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" />
         <EntityTypeShape EntityType="Model.Wristband" Width="1.5" PointX="5.375" PointY="3.125" />
         <AssociationConnector Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" />
+        <EntityTypeShape EntityType="Model.ClientTicket" Width="1.5" PointX="7.625" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.TicketType" Width="1.5" PointX="0.75" PointY="5.875" />
         <AssociationConnector Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" />
+        <EntityTypeShape EntityType="Model.TicketInPriceList" Width="1.5" PointX="3" PointY="4.625" />
+        <AssociationConnector Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" />
+        <AssociationConnector Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" />
+        <AssociationConnector Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdTicketType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

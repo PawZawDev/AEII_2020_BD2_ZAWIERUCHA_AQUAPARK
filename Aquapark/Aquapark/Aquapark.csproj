@@ -214,6 +214,9 @@
     <Compile Include="Models\TicketInPriceList.cs">
       <DependentUpon>AquaparkModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TicketType.cs">
+      <DependentUpon>AquaparkModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Wristband.cs">
       <DependentUpon>AquaparkModel.tt</DependentUpon>
     </Compile>
