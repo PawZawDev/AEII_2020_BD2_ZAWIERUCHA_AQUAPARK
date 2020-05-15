@@ -25,7 +25,7 @@ namespace Aquapark.Models
         public int IdTicketType { get; set; }
         public decimal Price { get; set; }
         public Nullable<int> Entries { get; set; }
-        public System.DateTime Duration { get; set; }
+        public System.TimeSpan Duration { get; set; }
         public System.DateTime StartDate { get; set; }
         public Nullable<System.DateTime> EndDate { get; set; }
         public int IdAttraction { get; set; }

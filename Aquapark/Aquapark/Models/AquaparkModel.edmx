@@ -70,7 +70,7 @@
           <Property Name="IdTicketType" Type="int" Nullable="false" />
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Entries" Type="int" />
-          <Property Name="Duration" Type="date" Nullable="false" />
+          <Property Name="Duration" Type="time" Precision="7" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" />
           <Property Name="IdAttraction" Type="int" Nullable="false" />
@@ -253,7 +253,7 @@
             <End Role="TicketType" EntitySet="TicketType" />
             <End Role="TicketInPriceList" EntitySet="TicketInPriceList" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -393,7 +393,7 @@
           <Property Name="IdTicketType" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Entries" Type="Int32" />
-          <Property Name="Duration" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Duration" Type="Time" Nullable="false" Precision="7" />
           <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="EndDate" Type="DateTime" Precision="0" />
           <Property Name="IdAttraction" Type="Int32" Nullable="false" />
@@ -437,7 +437,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
