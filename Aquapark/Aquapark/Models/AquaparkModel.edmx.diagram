@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="08396824a60b41db82506a353799682e" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="9.5" PointY="1.125" />
+      <Diagram DiagramId="08396824a60b41db82506a353799682e" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="11.75" PointY="1.75" />
         <EntityTypeShape EntityType="Model.Attraction" Width="1.5" PointX="0.75" PointY="3" />
         <EntityTypeShape EntityType="Model.EntryGate" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="Model.TicketInPriceList" Width="1.5" PointX="3" PointY="3.875" />

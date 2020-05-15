@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\AttractionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WristbandsController.cs" />
@@ -302,6 +303,11 @@
     <Content Include="Views\Wristbands\Details.cshtml" />
     <Content Include="Views\Wristbands\Edit.cshtml" />
     <Content Include="Views\Wristbands\Index.cshtml" />
+    <Content Include="Views\Attractions\Create.cshtml" />
+    <Content Include="Views\Attractions\Delete.cshtml" />
+    <Content Include="Views\Attractions\Details.cshtml" />
+    <Content Include="Views\Attractions\Edit.cshtml" />
+    <Content Include="Views\Attractions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
