@@ -276,7 +276,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" ConcurrencyMode="None" />
           <Property Name="IsOpen" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="EntryGate" Relationship="Model.FK_dboEntryGate_dbo_EntryGate_IdAttraction" FromRole="Attraction" ToRole="EntryGate" />
           <NavigationProperty Name="TicketInPriceList" Relationship="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" FromRole="Attraction" ToRole="TicketInPriceList" />
