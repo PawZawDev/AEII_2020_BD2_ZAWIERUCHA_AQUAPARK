@@ -30,8 +30,8 @@ namespace Aquapark.Models
         public virtual DbSet<EntryGate> EntryGate { get; set; }
         public virtual DbSet<ClientEntry> ClientEntry { get; set; }
         public virtual DbSet<Wristband> Wristband { get; set; }
-        public virtual DbSet<ClientTicket> ClientTicket { get; set; }
         public virtual DbSet<TicketType> TicketType { get; set; }
         public virtual DbSet<TicketInPriceList> TicketInPriceList { get; set; }
+        public virtual DbSet<ClientTicket> ClientTicket { get; set; }
     }
 }

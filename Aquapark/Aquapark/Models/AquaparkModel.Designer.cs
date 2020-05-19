@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Romek.000\Desktop\Politechniczka Śląska\BD Pojekt\AEII_2020_BD2_ZAWIERUCHA_AQUAPARK\Aquapark\Aquapark\Models\AquaparkModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\MojFolder\uczelnia\BD2\AEII_2020_BD2_ZAWIERUCHA_AQUAPARK\Aquapark\Aquapark\Models\AquaparkModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

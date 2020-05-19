@@ -21,9 +21,9 @@ namespace Aquapark.Models
         public System.DateTime ActivationDate { get; set; }
         public System.DateTime ExpirationDate { get; set; }
         public int IdTicketInPriceList { get; set; }
-        public int IdWristband { get; set; }
+        public Nullable<int> IdWristband { get; set; }
     
-        public virtual Wristband Wristband { get; set; }
         public virtual TicketInPriceList TicketInPriceList { get; set; }
+        public virtual Wristband Wristband { get; set; }
     }
 }

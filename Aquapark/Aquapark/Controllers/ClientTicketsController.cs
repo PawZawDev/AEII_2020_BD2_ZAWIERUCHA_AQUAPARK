@@ -1,7 +1,8 @@
-﻿    using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -148,7 +149,7 @@ namespace Aquapark.Controllers
             ClientTicket clientTicket = new ClientTicket();
             clientTicket.IdWristband = id ?? 0;
 
-            if (db.Wristband.Find(clientTicket.IdWristband).IsUsed == false) 
+            if (db.Wristband.Find(clientTicket.IdWristband).IsUsed == false)
             {
                 var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name == "Aquapark");
 
@@ -233,6 +234,119 @@ namespace Aquapark.Controllers
             var clientTicket = db.ClientTicket.Include(c => c.Wristband).Include(c => c.TicketInPriceList).Where(n => n.IdTicketInPriceList == id);
             return View(clientTicket.ToList());
         }
+
+
+        // id - idWristband
+        public ActionResult GetTicketsOnWristband(int? id)
+        {
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Wristband wristband = db.Wristband.Find(id);
+            if (wristband == null)
+            {
+                return HttpNotFound();
+            }
+
+
+            var clientTickets = db.ClientTicket.Where(c => c.IdWristband == id);
+            ViewBag.idWristband = id;
+            return View(clientTickets.ToList());
+        }
+
+
+
+
+
+
+        public ActionResult GetTicketsToPay(int? id)
+        {
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Wristband wristband = db.Wristband.Find(id);
+            if (wristband == null)
+            {
+                return HttpNotFound();
+            }
+
+            var clientTickets = db.ClientTicket.Where(c => c.IdWristband == id).Where(c => c.WasPaid == false);
+
+            decimal moneyToPay = 0;
+            foreach (var ticket in clientTickets)
+            {
+                moneyToPay += ticket.TicketInPriceList.Price;
+            }
+
+            ViewBag.moneyToPay = moneyToPay;
+            ViewBag.idWristband = id;
+            return View(clientTickets.ToList());
+        }
+
+
+        public ActionResult PayTickets(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Wristband wristband = db.Wristband.Find(id);
+            if (wristband == null)
+            {
+                return HttpNotFound();
+            }
+
+            var clientTickets = db.ClientTicket.Where(c => c.IdWristband == id).Where(c => c.WasPaid == false);
+
+            foreach (var ticket in clientTickets)
+            {
+                ticket.WasPaid = true;
+                db.Entry(ticket).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+            return RedirectToAction("GetTicketsOnWristband",new { id = id });
+        }
+
+        public ActionResult ReturnWristband(int? id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            Wristband wristband = db.Wristband.Find(id);
+            if (wristband == null)
+            {
+                return HttpNotFound();
+            }
+
+            var clientTickets = db.ClientTicket.Where(c => c.IdWristband == id);
+
+            foreach (var ticket in clientTickets)
+            {
+                if (!ticket.WasPaid)
+                {
+                    return RedirectToAction("GetTicketsToPay", new { id = id });
+                }
+            }
+            foreach (var ticket in clientTickets)
+            {
+                ticket.IdWristband = null;
+                db.Entry(ticket).State = EntityState.Modified;
+            }
+            wristband.IsUsed = false;
+
+            db.SaveChanges();
+            return RedirectToAction("Index","Wristbands");
+        }
+
 
     }
 }
