@@ -37,5 +37,23 @@ namespace Aquapark.Controllers
 
             return View("Chart");
         }
+
+        public ActionResult UsedWristbands()
+        {
+
+            var order = db.Wristband.Select(n => new
+            {
+                y = n.Id,
+                x = n.IsUsed
+            });
+
+            ViewBag.data = order.ToList();
+
+            var chart = new Chart(600, 400).AddSeries(name: "Tickets", yValues: order, yFields: "y", xValue: order, xField: "x").AddTitle("Used wristband");
+
+            ViewBag.chart = chart;
+
+            return View("Chart");
+        }
     }
 }
