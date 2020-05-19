@@ -175,6 +175,7 @@
     <Compile Include="Controllers\ClientTicketsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\TicketInPriceListsController.cs" />
     <Compile Include="Controllers\WristbandsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -331,9 +332,12 @@
     <Content Include="Views\ClientTickets\GetTicketsToPay.cshtml" />
     <Content Include="Views\TicketInPriceLists\Update.cshtml" />
     <Content Include="Views\TicketInPriceLists\IndexHistory.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Reports\Chart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Raport\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

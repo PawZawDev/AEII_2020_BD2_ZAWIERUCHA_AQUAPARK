@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Charts";
+}
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("TicketsTypes", "Index", new { selectedChart = "TicketsTypes" })</li>
+        <li>@Html.ActionLink("SellsPerDate1", "Index", new { selectedChart = "SellsPerDate" })</li>
+        <li>@Html.ActionLink("SellsPerDate2", "Index", new { selectedChart = "SellsPerDate" })</li>
+        <li>@Html.ActionLink("SellsPerDate3", "Index", new { selectedChart = "SellsPerDate" })</li>
+    </ul>
+</div>
+
+<div style="text-align:center">
+    @{
+        string chartPath = "Reports/" + ViewBag.selectedChart;
+
+        if (chartPath != "Reports/")
+        {
+            <p><img src="@chartPath" /></p>
+        }
+        else
+        {
+            <h2>Select the chart to display</h2>
+        }
+    }
+</div>
