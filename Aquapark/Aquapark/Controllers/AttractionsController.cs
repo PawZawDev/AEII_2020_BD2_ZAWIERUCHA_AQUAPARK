@@ -35,9 +35,7 @@ namespace Aquapark.Controllers
             return View(attraction);
         }
 
-
         // GET: Attractions/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -48,7 +46,6 @@ namespace Aquapark.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Name,IsOpen")] Attraction attraction)
         {
             if (ModelState.IsValid)
@@ -62,7 +59,6 @@ namespace Aquapark.Controllers
         }
 
         // GET: Attractions/Edit/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -82,7 +78,6 @@ namespace Aquapark.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit([Bind(Include = "Id,Name,IsOpen")] Attraction attraction)
         {
 
@@ -97,7 +92,6 @@ namespace Aquapark.Controllers
         }
 
         // GET: Attractions/Delete/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -113,7 +107,6 @@ namespace Aquapark.Controllers
         }
 
         // POST: Attractions/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -17,12 +17,11 @@ namespace Aquapark.Controllers
         // GET: TicketInPriceLists
         public ActionResult Index()
         {
-            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
+            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType);
             return View(ticketInPriceList.ToList());
         }
 
         // GET: TicketInPriceLists/Details/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,7 +37,6 @@ namespace Aquapark.Controllers
         }
 
         // GET: TicketInPriceLists/Create
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.IdAttraction = new SelectList(db.Attraction, "Id", "Name");
@@ -51,7 +49,6 @@ namespace Aquapark.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Name,IdTicketType,Price,Entries,Duration,StartDate,EndDate,IdAttraction")] TicketInPriceList ticketInPriceList)
         {
             if (ModelState.IsValid)
@@ -67,7 +64,6 @@ namespace Aquapark.Controllers
         }
 
         // GET: TicketInPriceLists/Edit/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -89,7 +85,6 @@ namespace Aquapark.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit([Bind(Include = "Id,Name,IdTicketType,Price,Entries,Duration,StartDate,EndDate,IdAttraction")] TicketInPriceList ticketInPriceList)
         {
             if (ModelState.IsValid)
@@ -104,7 +99,6 @@ namespace Aquapark.Controllers
         }
 
         // GET: TicketInPriceLists/Delete/5
-        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -120,7 +114,6 @@ namespace Aquapark.Controllers
         }
 
         // POST: TicketInPriceLists/Delete/5
-        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -139,17 +132,5 @@ namespace Aquapark.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-
-        // GET: TicketInPriceLists/TicketsForAttraction
-        public ActionResult TicketsForAttraction(int? id)
-        {
-            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(tcketInPriceList => tcketInPriceList.IdAttraction == id);
-            return View(ticketInPriceList.ToList());
-        }
-        
-
-
     }
 }

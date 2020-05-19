@@ -65,12 +65,9 @@
             @Html.DisplayFor(modelItem => item.TicketType.Type)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-        <td>
-            @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, null)
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

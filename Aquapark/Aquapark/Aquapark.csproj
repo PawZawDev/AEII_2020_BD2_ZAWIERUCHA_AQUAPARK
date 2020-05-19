@@ -172,7 +172,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\AttractionsController.cs" />
+    <Compile Include="Controllers\ClientEntriesController.cs" />
     <Compile Include="Controllers\ClientTicketsController.cs" />
+    <Compile Include="Controllers\EntryGatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TicketInPriceListsController.cs" />
@@ -325,10 +327,17 @@
     <Content Include="Views\TicketInPriceLists\Details.cshtml" />
     <Content Include="Views\TicketInPriceLists\Edit.cshtml" />
     <Content Include="Views\TicketInPriceLists\Index.cshtml" />
-    <Content Include="Views\TicketInPriceLists\TicketsForAttraction.cshtml" />
-    <Content Include="Views\ClientTickets\TicketsForTicketType.cshtml" />
-    <Content Include="Views\ClientTickets\GetTicketsOnWristband.cshtml" />
-    <Content Include="Views\ClientTickets\GetTicketsToPay.cshtml" />
+    <Content Include="Views\ClientEntries\Create.cshtml" />
+    <Content Include="Views\ClientEntries\Delete.cshtml" />
+    <Content Include="Views\ClientEntries\Details.cshtml" />
+    <Content Include="Views\ClientEntries\Edit.cshtml" />
+    <Content Include="Views\ClientEntries\Index.cshtml" />
+    <Content Include="Views\EntryGates\Create.cshtml" />
+    <Content Include="Views\EntryGates\Delete.cshtml" />
+    <Content Include="Views\EntryGates\Details.cshtml" />
+    <Content Include="Views\EntryGates\Edit.cshtml" />
+    <Content Include="Views\EntryGates\Index.cshtml" />
+    <Content Include="Views\ClientEntries\Symulation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

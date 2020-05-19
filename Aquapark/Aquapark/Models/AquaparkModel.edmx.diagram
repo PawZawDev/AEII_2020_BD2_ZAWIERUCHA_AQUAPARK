@@ -13,13 +13,13 @@
         <AssociationConnector Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdEntryGate" />
         <EntityTypeShape EntityType="Model.Wristband" Width="1.5" PointX="5.375" PointY="3.125" />
         <AssociationConnector Association="Model.FK_dboClientEntry_dbo_ClientEntry_IdWristband" />
+        <EntityTypeShape EntityType="Model.ClientTicket" Width="1.5" PointX="7.625" PointY="4.75" />
         <EntityTypeShape EntityType="Model.TicketType" Width="1.5" PointX="0.75" PointY="5.875" />
+        <AssociationConnector Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" />
         <EntityTypeShape EntityType="Model.TicketInPriceList" Width="1.5" PointX="3" PointY="4.625" />
         <AssociationConnector Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdAttraction" />
-        <AssociationConnector Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdTicketType" />
-        <EntityTypeShape EntityType="Model.ClientTicket" Width="1.5" PointX="7.625" PointY="4.125" />
         <AssociationConnector Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdTicketInPriceList" />
-        <AssociationConnector Association="Model.FK_dboClientTicket_dbo_ClientTicket_IdWristband" />
+        <AssociationConnector Association="Model.FK_dboTicketInPriceList_dbo_TicketInPriceList_IdTicketType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

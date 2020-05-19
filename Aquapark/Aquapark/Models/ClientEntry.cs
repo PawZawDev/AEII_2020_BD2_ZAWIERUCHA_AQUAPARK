@@ -16,6 +16,7 @@ namespace Aquapark.Models
     {
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
+        public System.DateTime ReturnDate { get; set; }
         public bool IsGoesInside { get; set; }
         public int IdEntryGate { get; set; }
         public int IdWristband { get; set; }
