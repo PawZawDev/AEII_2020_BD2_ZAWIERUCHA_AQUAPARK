@@ -225,5 +225,14 @@ namespace Aquapark.Controllers
 
             return View(clientTicket.ToList());
         }
+
+
+        // GET: ClientTickets/TicketsForTicketType
+        public ActionResult TicketsForTicketType(int? id)
+        {
+            var clientTicket = db.ClientTicket.Include(c => c.Wristband).Include(c => c.TicketInPriceList).Where(n => n.IdTicketInPriceList == id);
+            return View(clientTicket.ToList());
+        }
+
     }
 }

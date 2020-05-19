@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Aquapark.Models.ClientTicket>
+
+@{
+    ViewBag.Title = "TicketsForTicketType";
+}
+
+<h2>TicketsForTicketType</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntriesLeft)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WasPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Wristband.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TicketInPriceList.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EntriesLeft)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WasPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wristband.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketInPriceList.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+

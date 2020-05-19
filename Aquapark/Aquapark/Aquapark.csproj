@@ -325,6 +325,8 @@
     <Content Include="Views\TicketInPriceLists\Details.cshtml" />
     <Content Include="Views\TicketInPriceLists\Edit.cshtml" />
     <Content Include="Views\TicketInPriceLists\Index.cshtml" />
+    <Content Include="Views\TicketInPriceLists\TicketsForAttraction.cshtml" />
+    <Content Include="Views\ClientTickets\TicketsForTicketType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

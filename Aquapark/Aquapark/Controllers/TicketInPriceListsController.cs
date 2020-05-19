@@ -17,7 +17,7 @@ namespace Aquapark.Controllers
         // GET: TicketInPriceLists
         public ActionResult Index()
         {
-            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType);
+            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
             return View(ticketInPriceList.ToList());
         }
 
@@ -139,5 +139,17 @@ namespace Aquapark.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+        // GET: TicketInPriceLists/TicketsForAttraction
+        public ActionResult TicketsForAttraction(int? id)
+        {
+            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(tcketInPriceList => tcketInPriceList.IdAttraction == id);
+            return View(ticketInPriceList.ToList());
+        }
+        
+
+
     }
 }
