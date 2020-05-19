@@ -17,6 +17,11 @@ namespace Aquapark.Controllers
         // GET: TicketInPriceLists
         public ActionResult Index()
         {
+            if(System.Web.HttpContext.Current.User.IsInRole("Admin"))
+            {
+                return RedirectToAction("IndexHistory");
+            }
+
             var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
             return View(ticketInPriceList.ToList());
         }
@@ -54,6 +59,8 @@ namespace Aquapark.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Name,IdTicketType,Price,Entries,Duration,StartDate,EndDate,IdAttraction")] TicketInPriceList ticketInPriceList)
         {
+            ticketInPriceList.StartDate = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.TicketInPriceList.Add(ticketInPriceList);
@@ -148,7 +155,73 @@ namespace Aquapark.Controllers
             var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(tcketInPriceList => tcketInPriceList.IdAttraction == id);
             return View(ticketInPriceList.ToList());
         }
-        
+
+
+
+
+
+        // GET: TicketInPriceLists/Edit/5
+        [Authorize(Roles = "Admin")]
+        public ActionResult Update(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            TicketInPriceList ticketInPriceList = db.TicketInPriceList.Find(id);
+            if (ticketInPriceList == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.IdAttraction = new SelectList(db.Attraction, "Id", "Name", ticketInPriceList.IdAttraction);
+            ViewBag.IdTicketType = new SelectList(db.TicketType, "Id", "Type", ticketInPriceList.IdTicketType);
+            return View(ticketInPriceList);
+        }
+
+        // POST: TicketInPriceLists/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Update([Bind(Include = "Id,Name,IdTicketType,Price,Entries,Duration,StartDate,EndDate,IdAttraction")] TicketInPriceList ticketInPriceList)
+        {
+            ticketInPriceList.StartDate = DateTime.Now;
+
+            TicketInPriceList oldTicket = db.TicketInPriceList.Find(ticketInPriceList.Id);
+            oldTicket.EndDate = DateTime.Now;
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(oldTicket).State = EntityState.Modified;
+                db.TicketInPriceList.Add(ticketInPriceList);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.IdAttraction = new SelectList(db.Attraction, "Id", "Name", ticketInPriceList.IdAttraction);
+            ViewBag.IdTicketType = new SelectList(db.TicketType, "Id", "Type", ticketInPriceList.IdTicketType);
+            return View(ticketInPriceList);
+        }
+
+
+        // GET: TicketInPriceLists
+        public ActionResult IndexHistory(DateTime? searchDate)
+        {
+            ViewBag.searchDate = searchDate;
+
+            if (searchDate != null)
+            {
+                var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate >= searchDate).Where(n => n.StartDate <= searchDate);
+                return View(ticketInPriceList.ToList());
+            }
+            else
+            {
+                var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
+                return View(ticketInPriceList.ToList());
+            }
+        }
+
 
 
     }

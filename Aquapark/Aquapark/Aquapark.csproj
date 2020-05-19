@@ -329,6 +329,8 @@
     <Content Include="Views\ClientTickets\TicketsForTicketType.cshtml" />
     <Content Include="Views\ClientTickets\GetTicketsOnWristband.cshtml" />
     <Content Include="Views\ClientTickets\GetTicketsToPay.cshtml" />
+    <Content Include="Views\TicketInPriceLists\Update.cshtml" />
+    <Content Include="Views\TicketInPriceLists\IndexHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

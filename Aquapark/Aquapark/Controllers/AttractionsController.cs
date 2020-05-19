@@ -74,6 +74,9 @@ namespace Aquapark.Controllers
             {
                 return HttpNotFound();
             }
+
+            attraction.Name = attraction.Name.TrimEnd();
+
             return View(attraction);
         }
 
@@ -85,8 +88,6 @@ namespace Aquapark.Controllers
         [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit([Bind(Include = "Id,Name,IsOpen")] Attraction attraction)
         {
-
-            attraction.Name = attraction.Name.TrimEnd();
             if (ModelState.IsValid)
             {                
                 db.Entry(attraction).State = EntityState.Modified;
