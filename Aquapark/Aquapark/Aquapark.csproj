@@ -172,7 +172,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\AttractionsController.cs" />
+    <Compile Include="Controllers\ClientEntriesController.cs" />
     <Compile Include="Controllers\ClientTicketsController.cs" />
+    <Compile Include="Controllers\EntryGatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -334,6 +336,17 @@
     <Content Include="Views\TicketInPriceLists\IndexHistory.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\Chart.cshtml" />
+    <Content Include="Views\ClientEntries\Create.cshtml" />
+    <Content Include="Views\ClientEntries\Delete.cshtml" />
+    <Content Include="Views\ClientEntries\Details.cshtml" />
+    <Content Include="Views\ClientEntries\Edit.cshtml" />
+    <Content Include="Views\ClientEntries\Index.cshtml" />
+    <Content Include="Views\EntryGates\Create.cshtml" />
+    <Content Include="Views\EntryGates\Delete.cshtml" />
+    <Content Include="Views\EntryGates\Details.cshtml" />
+    <Content Include="Views\EntryGates\Edit.cshtml" />
+    <Content Include="Views\EntryGates\Index.cshtml" />
+    <Content Include="Views\ClientEntries\Simulation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

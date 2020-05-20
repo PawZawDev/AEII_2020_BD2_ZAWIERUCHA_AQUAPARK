@@ -19,7 +19,7 @@
                 </button>
                 @Html.ActionLink("Aquapark", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" style="font-size:10px">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
@@ -29,6 +29,8 @@
                     <li>@Html.ActionLink("Ticketss", "Index", "ClientTickets")</li>
                     <li>@Html.ActionLink("TC", "Index", "TicketInPriceLists")</li>
                     <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                    <li>@Html.ActionLink("ClientEntries", "Index", "ClientEntries")</li>
+                    <li>@Html.ActionLink("EntryGates", "Index", "EntryGates")</li>
 
                     @{
                         if (System.Web.HttpContext.Current.User.IsInRole("Admin"))

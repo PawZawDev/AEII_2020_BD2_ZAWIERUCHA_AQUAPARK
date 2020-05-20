@@ -55,5 +55,29 @@ namespace Aquapark.Controllers
 
             return View("Chart");
         }
+
+
+        public ActionResult TicketsSoldByType()
+        {
+
+            var order = db.ClientTicket.Select(n => new
+            {
+                x = n.TicketInPriceList.Name,
+            });
+
+            var order2 = order.GroupBy(n => n.x).Select(n => new
+            {
+                x = n.Key,
+                y = n.Count()
+            });
+
+            ViewBag.data = order.ToList();
+
+            var chart = new Chart(600, 400).AddSeries(name: "Tickets", yValues: order2, yFields: "y", xValue: order2, xField: "x").AddTitle("Tickets sold by type");
+
+            ViewBag.chart = chart;
+
+            return View("Chart");
+        }
     }
 }
