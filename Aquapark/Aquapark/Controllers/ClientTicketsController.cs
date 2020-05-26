@@ -253,6 +253,11 @@ namespace Aquapark.Controllers
 
 
             var clientTickets = db.ClientTicket.Where(c => c.IdWristband == id);
+
+            if (clientTickets.Where(n => n.WasPaid == false).Count() > 0)
+                ViewBag.AreThereTicketsToPay = true;
+            else ViewBag.AreThereTicketsToPay = false;
+
             ViewBag.idWristband = id;
             return View(clientTickets.ToList());
         }
