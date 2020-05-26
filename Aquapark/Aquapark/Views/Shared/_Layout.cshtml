@@ -19,15 +19,15 @@
                 </button>
                 @Html.ActionLink("Aquapark", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse" style="font-size:10px">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     <li>@Html.ActionLink("Wristbands", "Index", "Wristbands")</li>
                     <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
-                    <li>@Html.ActionLink("Ticketss", "Index", "ClientTickets")</li>
-                    <li>@Html.ActionLink("TC", "Index", "TicketInPriceLists")</li>
+                    <li>@Html.ActionLink("ClientTickets", "Index", "ClientTickets")</li>
+                    <li>@Html.ActionLink("PriceList", "Index", "TicketInPriceLists")</li>
                     <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
                     <li>@Html.ActionLink("ClientEntries", "Index", "ClientEntries")</li>
                     <li>@Html.ActionLink("EntryGates", "Index", "EntryGates")</li>
