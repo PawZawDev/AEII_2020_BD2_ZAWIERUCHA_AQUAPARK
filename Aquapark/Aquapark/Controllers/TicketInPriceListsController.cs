@@ -86,6 +86,7 @@ namespace Aquapark.Controllers
             {
                 return HttpNotFound();
             }
+            ticketInPriceList.Name = ticketInPriceList.Name.TrimEnd();
             ViewBag.IdAttraction = new SelectList(db.Attraction, "Id", "Name", ticketInPriceList.IdAttraction);
             ViewBag.IdTicketType = new SelectList(db.TicketType, "Id", "Type", ticketInPriceList.IdTicketType);
             return View(ticketInPriceList);
@@ -153,7 +154,7 @@ namespace Aquapark.Controllers
         public ActionResult TicketsForAttraction(int? id)
         {
             var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(tcketInPriceList => tcketInPriceList.IdAttraction == id);
-            return View(ticketInPriceList.ToList());
+            return View("Index",ticketInPriceList.ToList());
         }
 
 

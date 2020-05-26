@@ -39,7 +39,13 @@ namespace Aquapark.Controllers
         // GET: ClientEntries/Create
         public ActionResult Create()
         {
-            ViewBag.IdEntryGate = new SelectList(db.EntryGate, "Id", "Id");
+            var entryGates = db.EntryGate.Select(n => new
+            {
+                Id = n.Id,
+                Description = n.Attraction.Name + " " + n.Id
+            });
+
+            ViewBag.IdEntryGate = new SelectList(entryGates, "Id", "Description");
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id");
             return View();
         }
@@ -51,14 +57,21 @@ namespace Aquapark.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Date,IsGoesInside,IdEntryGate,IdWristband")] ClientEntry clientEntry)
         {
+
+            clientEntry.Date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.ClientEntry.Add(clientEntry);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            var entryGates = db.EntryGate.Select(n => new
+            {
+                Id = n.Id,
+                Description = n.Attraction.Name + " " + n.Id
+            });
 
-            ViewBag.IdEntryGate = new SelectList(db.EntryGate, "Id", "Id", clientEntry.IdEntryGate);
+            ViewBag.IdEntryGate = new SelectList(entryGates, "Id", "Description", clientEntry.IdEntryGate);
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id", clientEntry.IdWristband);
             return View(clientEntry);
         }
@@ -138,7 +151,13 @@ namespace Aquapark.Controllers
         // GET: ClientEntries/Create
         public ActionResult Simulation()
         {
-            ViewBag.IdEntryGate = new SelectList(db.EntryGate.Where(n => n.IsActive == true), "Id", "Id");
+            var entryGates = db.EntryGate.Select(n => new
+            {
+                Id = n.Id,
+                Description = n.Attraction.Name + " " + n.Id,
+                IsActive = n.IsActive
+            });
+            ViewBag.IdEntryGate = new SelectList(entryGates.Where(n => n.IsActive == true), "Id", "Description");           
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id");
             return View();
         }
@@ -193,7 +212,14 @@ namespace Aquapark.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdEntryGate = new SelectList(db.EntryGate, "Id", "Id", clientEntry.IdEntryGate);
+            var entryGates = db.EntryGate.Select(n => new
+            {
+                Id = n.Id,
+                Description = n.Attraction.Name + " " + n.Id,
+                 IsActive = n.IsActive
+            });
+
+            ViewBag.IdEntryGate = new SelectList(entryGates.Where(n => n.IsActive == true), "Id", "Description", clientEntry.IdEntryGate);            
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id", clientEntry.IdWristband);
             return View(clientEntry);
         }
