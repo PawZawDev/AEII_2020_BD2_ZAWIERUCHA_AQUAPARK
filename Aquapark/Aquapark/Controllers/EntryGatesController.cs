@@ -15,9 +15,38 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: EntryGates
-        public ActionResult Index()
+        public ActionResult Index(string attractionNameSearch,int? isActiveSearch)
         {
+            Dictionary<int, string> isActiveList = new Dictionary<int, string>();
+            isActiveList.Add(1, "Active");
+            isActiveList.Add(2, "Close");
+
+            var isActiveSearchList = isActiveList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.IsActiveSearch = new SelectList(isActiveSearchList, "Id", "Value");
+
+
             var entryGate = db.EntryGate.Include(e => e.Attraction);
+
+            if (attractionNameSearch != null)
+            {
+                entryGate = entryGate.Where(n => n.Attraction.Name.Contains(attractionNameSearch));
+            }
+            if (isActiveSearch == 1)
+            {
+                entryGate = entryGate.Where(n => n.IsActive == true);
+            }
+            if (isActiveSearch == 2)
+            {
+                entryGate = entryGate.Where(n => n.IsActive == false);
+            }
+
+            if (Request.IsAjaxRequest())
+                return PartialView("IndexSearch", entryGate.ToList());
+
             return View(entryGate.ToList());
         }
 

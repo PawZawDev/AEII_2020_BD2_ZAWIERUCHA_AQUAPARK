@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Aquapark.Models;
 
 namespace Aquapark.Controllers
@@ -15,9 +16,37 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: Attractions
-        public ActionResult Index()
+        public ActionResult Index(int? isOpenSearch)
         {
-            return View(db.Attraction.ToList());
+            Dictionary<int, string> isOpenList = new Dictionary<int, string>();
+            isOpenList.Add(1, "Open");
+            isOpenList.Add(2, "Close");
+
+            var isOpenSearchList = isOpenList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            var attractions = db.Attraction.Select(n => n);
+
+            if(isOpenSearch == 1)
+            {
+                attractions = attractions.Where(n => n.IsOpen == true);
+            }
+            if (isOpenSearch == 2)
+            {
+                attractions = attractions.Where(n => n.IsOpen == false);
+            }
+
+            attractions.OrderBy(n => n.Name);
+
+
+            ViewBag.IsOpenSearch = new SelectList(isOpenSearchList, "Id", "Value");
+
+            if (Request.IsAjaxRequest())
+                return PartialView("IndexSearch", attractions.ToList());
+
+            return View(attractions.ToList());
         }
 
         // GET: Attractions/Details/5

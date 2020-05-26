@@ -346,6 +346,8 @@
     <Content Include="Views\EntryGates\Edit.cshtml" />
     <Content Include="Views\EntryGates\Index.cshtml" />
     <Content Include="Views\ClientEntries\Simulation.cshtml" />
+    <Content Include="Views\Attractions\IndexSearch.cshtml" />
+    <Content Include="Views\EntryGates\IndexSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

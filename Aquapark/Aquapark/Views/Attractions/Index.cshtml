@@ -6,10 +6,16 @@
 
 <h2>Index</h2>
 
+<div>
+    @Html.DropDownList("IsOpenSearch", "Both")
+</div>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+
+<table class="table" id="resultsTable">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -40,3 +46,16 @@
 }
 
 </table>
+
+
+<script src="~/Scripts/jquery-3.4.1.slim.min.js"></script>
+<script>
+    $(function () {
+        $("#IsOpenSearch").change(function (e) {
+            var ios = $("#IsOpenSearch").val();
+            $.get("/Attractions/Index?IsOpenSearch=" + ios, function (data) {
+                    $("#resultsTable").html(data);
+                });
+        });
+    });
+</script>
