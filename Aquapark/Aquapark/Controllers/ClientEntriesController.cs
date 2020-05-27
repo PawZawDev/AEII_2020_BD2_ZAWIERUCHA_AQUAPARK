@@ -157,6 +157,9 @@ namespace Aquapark.Controllers
                 Description = n.Attraction.Name + " " + n.Id,
                 IsActive = n.IsActive
             });
+
+            ViewBag.NoTicketsForAttraction = false;
+
             ViewBag.IdEntryGate = new SelectList(entryGates.Where(n => n.IsActive == true), "Id", "Description");           
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id");
             return View();
@@ -218,6 +221,8 @@ namespace Aquapark.Controllers
                 Description = n.Attraction.Name + " " + n.Id,
                  IsActive = n.IsActive
             });
+
+            ViewBag.NoTicketsForAttraction = true;
 
             ViewBag.IdEntryGate = new SelectList(entryGates.Where(n => n.IsActive == true), "Id", "Description", clientEntry.IdEntryGate);            
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id", clientEntry.IdWristband);
