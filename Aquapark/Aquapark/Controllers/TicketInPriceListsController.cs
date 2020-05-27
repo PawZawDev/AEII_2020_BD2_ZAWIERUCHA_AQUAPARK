@@ -15,14 +15,66 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: TicketInPriceLists
-        public ActionResult Index()
+        public ActionResult Index(string ticketNameSearch, string attractionNameSearch, int? ageGroupSearch, decimal? priceSearch, int? ticketTypeSearch, DateTime? searchDate)
         {
-            if(System.Web.HttpContext.Current.User.IsInRole("Admin"))
+            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType);
+
+
+            Dictionary<int, string> ticketTypeList = new Dictionary<int, string>();
+            ticketTypeList.Add(1, "Entries");
+            ticketTypeList.Add(2, "Duration");
+
+            var ticketTypeSearchList = ticketTypeList.Select(n => new
             {
-                return RedirectToAction("IndexHistory");
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.ticketTypeSearchList = new SelectList(ticketTypeSearchList, "Id", "Value");
+
+            @ViewBag.priceSearch = priceSearch;
+            ViewBag.AgeGroupList = new SelectList(db.TicketType, "Id", "Type");
+
+            @ViewBag.searchDate = searchDate;
+
+            if (ticketNameSearch != null)
+            {
+                ticketInPriceList = ticketInPriceList.Where(n => n.Name.Contains(ticketNameSearch));
+
+                ticketInPriceList = ticketInPriceList.Where(n => n.Attraction.Name.Contains(attractionNameSearch));
+
+                if (ageGroupSearch != null)
+                {
+                    ticketInPriceList = ticketInPriceList.Where(n => n.TicketType.Id == ageGroupSearch);
+                }
+
+                if (priceSearch != null)
+                {
+                    ticketInPriceList = ticketInPriceList.Where(n => n.Price <= priceSearch);
+                }
+
+                if (ticketTypeSearch == 1)
+                {
+                    ticketInPriceList = ticketInPriceList.Where(n => n.Entries != null);
+                }
+                if (ticketTypeSearch == 2)
+                {
+                    ticketInPriceList = ticketInPriceList.Where(n => n.Entries == null);
+                }
+
+                if (searchDate != null)
+                {
+                    ticketInPriceList = ticketInPriceList.Where(n => (n.EndDate >= searchDate || n.EndDate == null)).Where(n => n.StartDate <= searchDate);
+                }
+                else
+                {
+                    ticketInPriceList = ticketInPriceList.Where(n => n.EndDate == null);
+                }
             }
 
-            var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
+
+            if (Request.IsAjaxRequest())
+                return PartialView("IndexSearch", ticketInPriceList.ToList());
+
             return View(ticketInPriceList.ToList());
         }
 
@@ -207,21 +259,23 @@ namespace Aquapark.Controllers
 
 
         // GET: TicketInPriceLists
-        public ActionResult IndexHistory(DateTime? searchDate)
-        {
-            ViewBag.searchDate = searchDate;
+        //public ActionResult IndexHistory(DateTime? searchDate)
+        //{
+        //    ViewBag.searchDate = searchDate;
 
-            if (searchDate != null)
-            {
-                var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate >= searchDate).Where(n => n.StartDate <= searchDate);
-                return View(ticketInPriceList.ToList());
-            }
-            else
-            {
-                var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
-                return View(ticketInPriceList.ToList());
-            }
-        }
+        //    if (searchDate != null)
+        //    {
+        //        var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).
+        //            Where(n => (n.EndDate >= searchDate || n.EndDate == null)).
+        //            Where(n => n.StartDate <= searchDate);
+        //        return View(ticketInPriceList.ToList());
+        //    }
+        //    else
+        //    {
+        //        var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(n => n.EndDate == null);
+        //        return View(ticketInPriceList.ToList());
+        //    }
+        //}
 
 
 

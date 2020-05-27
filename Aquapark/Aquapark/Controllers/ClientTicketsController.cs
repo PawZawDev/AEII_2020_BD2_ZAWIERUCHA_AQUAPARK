@@ -16,9 +16,92 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: ClientTickets
-        public ActionResult Index()
+        public ActionResult Index(string attractionNameSearch, int? ticketTypeSearch, DateTime? dateSearch,int? isActiveSearch,int? wasPaidSearch)
         {
-            var clientTicket = db.ClientTicket.Include(c => c.Wristband).Include(c => c.TicketInPriceList);
+            ViewBag.searchDate = dateSearch;
+
+            Dictionary<int, string> ticketTypeList = new Dictionary<int, string>();
+            ticketTypeList.Add(1, "Entries");
+            ticketTypeList.Add(2, "Duration");
+
+            var ticketTypeSearchList = ticketTypeList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.ticketTypeSearchList = new SelectList(ticketTypeSearchList, "Id", "Value");
+
+
+            Dictionary<int, string> isActiveList = new Dictionary<int, string>();
+            isActiveList.Add(1, "Inactive");
+            isActiveList.Add(2, "All");
+
+            var isActiveSearchList = isActiveList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.isActiveSearchList = new SelectList(isActiveSearchList, "Id", "Value");
+
+
+            Dictionary<int, string> wasPaidList = new Dictionary<int, string>();
+            wasPaidList.Add(1, "Yes");
+            wasPaidList.Add(2, "All");
+
+            var wasPaidSearchList = wasPaidList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.wasPaidSearchList = new SelectList(wasPaidSearchList, "Id", "Value");
+
+
+            var clientTicket = db.ClientTicket.Include(c => c.Wristband).Include(c => c.TicketInPriceList).Select(n => n);
+
+
+            if(attractionNameSearch!=null)
+            {
+                clientTicket = clientTicket.Where(n => n.TicketInPriceList.Name.Contains(attractionNameSearch));
+            }
+
+
+            if (ticketTypeSearch == 1)
+            {
+                clientTicket = clientTicket.Where(n => n.EntriesLeft != null);
+            }
+            if (ticketTypeSearch == 2)
+            {
+                clientTicket = clientTicket.Where(n => n.EntriesLeft == null);
+            }
+
+            if (dateSearch != null)
+            {
+                clientTicket = clientTicket.Where(n => n.ActivationDate <= dateSearch).Where(n => (n.ExpirationDate >= dateSearch));
+            }
+
+            if (wasPaidSearch == 1)
+            {
+                clientTicket = clientTicket.Where(n => n.WasPaid == true);
+            }
+            if (wasPaidSearch == null)
+            {
+                clientTicket = clientTicket.Where(n => n.WasPaid == false);
+            }
+
+            if (isActiveSearch == 1)
+            {
+                clientTicket = clientTicket.Where(n => n.IsActive == false);
+            }
+            if (isActiveSearch == null)
+            {
+                clientTicket = clientTicket.Where(n => n.IsActive == true);
+            }
+
+            clientTicket.OrderBy(n => n.TicketInPriceList.Name);
+
+            if (Request.IsAjaxRequest())
+                return PartialView("IndexSearch", clientTicket.ToList());
+
             return View(clientTicket.ToList());
         }
 

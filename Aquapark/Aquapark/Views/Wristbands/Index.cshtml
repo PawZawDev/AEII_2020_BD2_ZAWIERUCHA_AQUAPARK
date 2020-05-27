@@ -9,7 +9,19 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+
+<div>
+    @{
+        if (System.Web.HttpContext.Current.User.IsInRole("Admin"))
+        {
+            <text>Find by activity:</text>@Html.DropDownList("isActiveSearchList", "Active")
+        }
+    }
+    Find by used: @Html.DropDownList("isUsedSearchList", "All")
+</div>
+
+
+<table class="table" id="resultsTable">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Id)
@@ -46,3 +58,16 @@
 }
 
 </table>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $("#isActiveSearchList,#isUsedSearchList").change(function (e) {
+            var ans = $("#isActiveSearchList").val();
+            var ius = $("#isUsedSearchList").val();
+            $.get("/Wristbands/Index?isActiveSearch=" + ans + "&isUsedSearch=" + ius, function (data) {
+                $("#resultsTable").html(data);
+            });
+        });
+    });
+</script>

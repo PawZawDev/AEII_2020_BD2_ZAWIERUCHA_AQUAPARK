@@ -15,9 +15,57 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: Wristbands
-        public ActionResult Index()
+        public ActionResult Index(int? isActiveSearch, int? isUsedSearch)
         {
-            return View(db.Wristband.ToList());
+            Dictionary<int, string> isActiveList = new Dictionary<int, string>();
+            isActiveList.Add(1, "Close");
+            isActiveList.Add(2, "All");
+
+            var isActiveSearchList = isActiveList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.isActiveSearchList = new SelectList(isActiveSearchList, "Id", "Value");
+
+            Dictionary<int, string> IsUsedList = new Dictionary<int, string>();
+            IsUsedList.Add(1, "Used");
+            IsUsedList.Add(2, "Not used");
+
+            var isUsedSearchList = IsUsedList.Select(n => new
+            {
+                Id = n.Key,
+                Value = n.Value
+            });
+            ViewBag.isUsedSearchList = new SelectList(isUsedSearchList, "Id", "Value");
+
+
+            var wristbands = db.Wristband.Select(n => n);
+
+
+            if (isActiveSearch == null) 
+            {
+                wristbands = wristbands.Where(n => n.IsActive == true);
+            }
+            else if (isActiveSearch == 1)
+            {
+                wristbands = wristbands.Where(n => n.IsActive == false);
+            }
+            if (isUsedSearch == 1)
+            {
+                wristbands = wristbands.Where(n => n.IsUsed == true);
+            }
+            else if (isUsedSearch == 2)
+            {
+                wristbands = wristbands.Where(n => n.IsUsed == false);
+            }
+
+
+            if (Request.IsAjaxRequest())
+                return PartialView("IndexSearch", wristbands.ToList()); 
+
+
+            return View(wristbands.ToList());
         }
 
         // GET: Wristbands/Details/5

@@ -332,7 +332,6 @@
     <Content Include="Views\ClientTickets\GetTicketsOnWristband.cshtml" />
     <Content Include="Views\ClientTickets\GetTicketsToPay.cshtml" />
     <Content Include="Views\TicketInPriceLists\Update.cshtml" />
-    <Content Include="Views\TicketInPriceLists\IndexHistory.cshtml" />
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\Chart.cshtml" />
     <Content Include="Views\ClientEntries\Create.cshtml" />
@@ -348,6 +347,9 @@
     <Content Include="Views\ClientEntries\Simulation.cshtml" />
     <Content Include="Views\Attractions\IndexSearch.cshtml" />
     <Content Include="Views\EntryGates\IndexSearch.cshtml" />
+    <Content Include="Views\Wristbands\IndexSearch.cshtml" />
+    <Content Include="Views\ClientTickets\IndexSearch.cshtml" />
+    <Content Include="Views\TicketInPriceLists\IndexSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
