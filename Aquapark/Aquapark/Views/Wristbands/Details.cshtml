@@ -32,8 +32,8 @@
     @{
         if (User.IsInRole("Admin") || User.IsInRole("SuperManager"))
         {
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) <text>|</text>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-outline-warning" })
         }
     }
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
 </p>
