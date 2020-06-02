@@ -9,13 +9,13 @@ using System.Web.Mvc;
 
 namespace Aquapark.Controllers
 {
-    [Authorize(Roles = "Admin,Manager,SuperManager")]
     public class ReportsController : Controller
     {
         private Entities db = new Entities();
 
 
         // GET: Reports
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Index(string selectedChart)
         {
             ViewBag.selectedChart = selectedChart;
