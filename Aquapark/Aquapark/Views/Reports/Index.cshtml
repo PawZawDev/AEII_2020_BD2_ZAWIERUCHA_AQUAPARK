@@ -12,6 +12,10 @@
     </ul>
 </div>
 
+<p style="text-align:center">
+    @Html.ActionLink("Create Report PDF", "CreatePDF", null, new { @class = "btn btn-success" })
+</p>
+
 <div style="text-align:center">
     @{
         string chartPath = "Reports/" + ViewBag.selectedChart;
