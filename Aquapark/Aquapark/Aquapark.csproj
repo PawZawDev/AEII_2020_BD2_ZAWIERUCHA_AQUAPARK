@@ -350,6 +350,7 @@
     <Content Include="Views\Wristbands\IndexSearch.cshtml" />
     <Content Include="Views\ClientTickets\IndexSearch.cshtml" />
     <Content Include="Views\TicketInPriceLists\IndexSearch.cshtml" />
+    <Content Include="Views\TicketInPriceLists\IndexAttractions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
