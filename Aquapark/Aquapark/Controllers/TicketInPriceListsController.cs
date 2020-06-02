@@ -60,15 +60,15 @@ namespace Aquapark.Controllers
                 {
                     ticketInPriceList = ticketInPriceList.Where(n => n.Entries == null);
                 }
+            }
 
-                if (searchDate != null)
-                {
-                    ticketInPriceList = ticketInPriceList.Where(n => (n.EndDate >= searchDate || n.EndDate == null)).Where(n => n.StartDate <= searchDate);
-                }
-                else
-                {
-                    ticketInPriceList = ticketInPriceList.Where(n => n.EndDate == null);
-                }
+            if (searchDate != null)
+            {
+                ticketInPriceList = ticketInPriceList.Where(n => (n.EndDate >= searchDate || n.EndDate == null)).Where(n => n.StartDate <= searchDate);
+            }
+            else
+            {
+                ticketInPriceList = ticketInPriceList.Where(n => n.EndDate == null);
             }
 
 
@@ -206,7 +206,7 @@ namespace Aquapark.Controllers
         public ActionResult TicketsForAttraction(int? id)
         {
             var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(tcketInPriceList => tcketInPriceList.IdAttraction == id);
-            return View("Index",ticketInPriceList.ToList());
+            return View("IndexAttractions",ticketInPriceList.ToList());
         }
 
 

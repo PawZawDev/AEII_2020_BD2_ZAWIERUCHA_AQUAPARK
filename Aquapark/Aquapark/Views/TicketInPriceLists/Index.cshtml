@@ -53,9 +53,14 @@
         <th>
             @Html.DisplayNameFor(model => model.StartDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
+        @{
+            if (System.Web.HttpContext.Current.User.IsInRole("Admin"))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+            }
+        }
 
         <th></th>
     </tr>
@@ -84,9 +89,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
+            @{
+                if (System.Web.HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                }
+            }
+
 
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
