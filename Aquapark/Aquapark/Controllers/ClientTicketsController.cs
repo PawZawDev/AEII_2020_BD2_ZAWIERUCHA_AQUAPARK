@@ -239,13 +239,13 @@ namespace Aquapark.Controllers
 
             if (db.Wristband.Find(clientTicket.IdWristband).IsUsed == false)
             {
-                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name == "Aquapark").Where(n => n.EndDate == null);
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name.Contains("Aquapark")).Where(n => n.EndDate == null);
 
                 ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name");
             }
             else
             {
-                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name != "Aquapark").Where(n => n.EndDate == null);
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => !d.Attraction.Name.Contains("Aquapark")).Where(n => n.EndDate == null);
 
                 ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name");
             }
@@ -283,13 +283,13 @@ namespace Aquapark.Controllers
 
             if (db.Wristband.Find(clientTicket.IdWristband).IsUsed == false)
             {
-                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name == "Aquapark").Where(n => n.EndDate == null);
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name.Contains("Aquapark")).Where(n => n.EndDate == null);
 
                 ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name", clientTicket.IdTicketInPriceList);
             }
             else
             {
-                var tickets = db.TicketInPriceList.Select(n => n).Where(d => d.Attraction.Name != "Aquapark").Where(n => n.EndDate == null);
+                var tickets = db.TicketInPriceList.Select(n => n).Where(d => !d.Attraction.Name.Contains("Aquapark")).Where(n => n.EndDate == null);
 
                 ViewBag.IdTicketInPriceList = new SelectList(tickets, "Id", "Name", clientTicket.IdTicketInPriceList);
             }
