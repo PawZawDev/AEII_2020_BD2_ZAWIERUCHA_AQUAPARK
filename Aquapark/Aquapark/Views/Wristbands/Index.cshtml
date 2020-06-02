@@ -47,9 +47,14 @@
         @Html.DisplayFor(modelItem => item.IsUsed)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+        @{ 
+            if (System.Web.HttpContext.Current.User.IsInRole("Employee"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+            }
+        }
         @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, null) |
         @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, null) |
         @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-success" })
