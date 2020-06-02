@@ -15,6 +15,7 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: Wristbands
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult Index(int? isActiveSearch, int? isUsedSearch)
         {
             Dictionary<int, string> isActiveList = new Dictionary<int, string>();
@@ -69,6 +70,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Wristbands/Details/5
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -84,6 +86,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Wristbands/Create
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Create()
         {
             return View();
@@ -92,6 +95,7 @@ namespace Aquapark.Controllers
         // POST: Wristbands/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin,SuperManager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,IsActive,IsUsed")] Wristband wristband)
@@ -107,6 +111,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Wristbands/Edit/5
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -138,6 +143,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Wristbands/Delete/5
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -153,6 +159,7 @@ namespace Aquapark.Controllers
         }
 
         // POST: Wristbands/Delete/5
+        [Authorize(Roles = "Admin,SuperManager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

@@ -1,4 +1,5 @@
 ﻿using Aquapark.Models;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -78,6 +79,13 @@ namespace Aquapark.Controllers
             ViewBag.chart = chart;
 
             return View("Chart");
+        }
+
+        public ActionResult CreatePDF()
+        {
+            var report = new ViewAsPdf("FullReport");
+
+            return report;
         }
     }
 }
