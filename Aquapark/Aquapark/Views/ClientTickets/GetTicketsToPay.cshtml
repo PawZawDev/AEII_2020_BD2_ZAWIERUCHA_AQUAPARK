@@ -62,13 +62,15 @@
         @Html.DisplayFor(modelItem => item.ExpirationDate)
     </td>
     @{
-        if (System.Web.HttpContext.Current.User.IsInRole("Admin"))
+        if (User.IsInRole("Admin"))
         {
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        }
+        else if (User.IsInRole("Manager") || User.IsInRole("SuperManager"))
+        {
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
         }
     }
 </tr>

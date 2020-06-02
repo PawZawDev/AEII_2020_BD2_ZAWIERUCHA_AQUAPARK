@@ -16,6 +16,7 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: Attractions
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult Index(int? isOpenSearch)
         {
             Dictionary<int, string> isOpenList = new Dictionary<int, string>();
@@ -50,6 +51,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Attractions/Details/5
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,7 +68,7 @@ namespace Aquapark.Controllers
 
 
         // GET: Attractions/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Create()
         {
             return View();
@@ -77,7 +79,6 @@ namespace Aquapark.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,Name,IsOpen")] Attraction attraction)
         {
             if (ModelState.IsValid)
@@ -91,7 +92,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Attractions/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -114,7 +115,6 @@ namespace Aquapark.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit([Bind(Include = "Id,Name,IsOpen")] Attraction attraction)
         {
             if (ModelState.IsValid)

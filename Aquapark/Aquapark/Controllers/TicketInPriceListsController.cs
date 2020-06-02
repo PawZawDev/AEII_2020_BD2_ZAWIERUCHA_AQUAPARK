@@ -15,6 +15,7 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: TicketInPriceLists
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult Index(string ticketNameSearch, string attractionNameSearch, int? ageGroupSearch, decimal? priceSearch, int? ticketTypeSearch, DateTime? searchDate)
         {
             var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType);
@@ -79,7 +80,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: TicketInPriceLists/Details/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -95,7 +96,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: TicketInPriceLists/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Create()
         {
             ViewBag.IdAttraction = new SelectList(db.Attraction, "Id", "Name");
@@ -203,6 +204,7 @@ namespace Aquapark.Controllers
 
 
         // GET: TicketInPriceLists/TicketsForAttraction
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult TicketsForAttraction(int? id)
         {
             var ticketInPriceList = db.TicketInPriceList.Include(t => t.Attraction).Include(t => t.TicketType).Where(tcketInPriceList => tcketInPriceList.IdAttraction == id);
@@ -214,7 +216,7 @@ namespace Aquapark.Controllers
 
 
         // GET: TicketInPriceLists/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Update(int? id)
         {
             if (id == null)
@@ -236,7 +238,6 @@ namespace Aquapark.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public ActionResult Update([Bind(Include = "Id,Name,IdTicketType,Price,Entries,Duration,StartDate,EndDate,IdAttraction")] TicketInPriceList ticketInPriceList)
         {
             ticketInPriceList.StartDate = DateTime.Now;

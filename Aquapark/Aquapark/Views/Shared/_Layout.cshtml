@@ -25,16 +25,13 @@
         <li>@Html.ActionLink("About", "About", "Home")</li>
         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
                     @{
-                        if (System.Web.HttpContext.Current.User.IsInRole("Employee"))
+                        if (User.IsInRole("Employee"))
                         {
                             <li>@Html.ActionLink("Wristbands", "Index", "Wristbands")</li>
                             <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
-                            <li>@Html.ActionLink("ClientTickets", "Index", "ClientTickets")</li>
                             <li>@Html.ActionLink("PriceList", "Index", "TicketInPriceLists")</li>
-                            <li>@Html.ActionLink("ClientEntries", "Index", "ClientEntries")</li>
-                            <li>@Html.ActionLink("EntryGates", "Index", "EntryGates")</li>
                         }
-                        if (System.Web.HttpContext.Current.User.IsInRole("Manager"))
+                        if (User.IsInRole("Manager"))
                         {
                             <li>@Html.ActionLink("Wristbands", "Index", "Wristbands")</li>
                             <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
@@ -44,7 +41,17 @@
                             <li>@Html.ActionLink("EntryGates", "Index", "EntryGates")</li>
                             <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
                         }
-                        if (System.Web.HttpContext.Current.User.IsInRole("Admin"))
+                        if (User.IsInRole("SuperManager"))
+                        {
+                            <li>@Html.ActionLink("Wristbands", "Index", "Wristbands")</li>
+                            <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>
+                            <li>@Html.ActionLink("ClientTickets", "Index", "ClientTickets")</li>
+                            <li>@Html.ActionLink("PriceList", "Index", "TicketInPriceLists")</li>
+                            <li>@Html.ActionLink("ClientEntries", "Index", "ClientEntries")</li>
+                            <li>@Html.ActionLink("EntryGates", "Index", "EntryGates")</li>
+                            <li>@Html.ActionLink("Reports", "Index", "Reports")</li>
+                        }
+                        if (User.IsInRole("Admin"))
                         {
                             <li>@Html.ActionLink("Wristbands", "Index", "Wristbands")</li>
                             <li>@Html.ActionLink("Attractions", "Index", "Attractions")</li>

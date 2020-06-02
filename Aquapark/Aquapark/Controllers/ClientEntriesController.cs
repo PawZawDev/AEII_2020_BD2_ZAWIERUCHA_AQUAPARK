@@ -15,6 +15,7 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: ClientEntries
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Index()
         {
             var clientEntry = db.ClientEntry.Include(c => c.EntryGate).Include(c => c.Wristband);
@@ -22,6 +23,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientEntries/Details/5
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientEntries/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             var entryGates = db.EntryGate.Select(n => new
@@ -77,6 +80,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientEntries/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -112,6 +116,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientEntries/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -149,6 +154,7 @@ namespace Aquapark.Controllers
 
 
         // GET: ClientEntries/Create
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Simulation()
         {
             var entryGates = db.EntryGate.Select(n => new

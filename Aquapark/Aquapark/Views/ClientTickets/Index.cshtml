@@ -18,9 +18,15 @@
     </div>
 }
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@{
+    if (User.IsInRole("Admin"))
+    {
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+    }
+}
+
 <table class="table" id="resultsTable">
     <tr>
         <th>
@@ -74,9 +80,18 @@
             </td>
 
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                    else if (User.IsInRole("Manager") || User.IsInRole("SuperManager"))
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    }
+                }
             </td>
         </tr>
     }
@@ -95,8 +110,8 @@
 
             $.get("/ClientTickets/Index?attractionNameSearch=" + ans + "&ticketTypeSearch=" + tts + "&dateSearch=" + ds
                 + "&isActiveSearch=" + ias + "&wasPaidSearch=" + wps, function (data) {
-                $("#resultsTable").html(data);
-            });
+                    $("#resultsTable").html(data);
+                });
         });
 
 
@@ -109,8 +124,8 @@
 
             $.get("/ClientTickets/Index?attractionNameSearch=" + ans + "&ticketTypeSearch=" + tts + "&dateSearch=" + ds
                 + "&isActiveSearch=" + ias + "&wasPaidSearch=" + wps, function (data) {
-                $("#resultsTable").html(data);
-            });
+                    $("#resultsTable").html(data);
+                });
         });
     });
 </script>

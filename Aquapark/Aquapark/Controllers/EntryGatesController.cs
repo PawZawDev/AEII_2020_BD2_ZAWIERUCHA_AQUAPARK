@@ -15,6 +15,7 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: EntryGates
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Index(string attractionNameSearch,int? isActiveSearch)
         {
             Dictionary<int, string> isActiveList = new Dictionary<int, string>();
@@ -51,6 +52,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: EntryGates/Details/5
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -66,6 +68,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: EntryGates/Create
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Create()
         {
             ViewBag.IdAttraction = new SelectList(db.Attraction, "Id", "Name");
@@ -91,6 +94,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: EntryGates/Edit/5
+        [Authorize(Roles = "Admin,SuperManager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -124,6 +128,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: EntryGates/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)

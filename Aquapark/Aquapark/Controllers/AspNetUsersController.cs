@@ -10,6 +10,7 @@ using Aquapark.Models;
 
 namespace Aquapark.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AspNetUsersController : Controller
     {
         private Entities db = new Entities();

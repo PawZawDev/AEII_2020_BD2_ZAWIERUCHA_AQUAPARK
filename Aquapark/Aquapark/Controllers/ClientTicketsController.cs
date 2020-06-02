@@ -16,6 +16,7 @@ namespace Aquapark.Controllers
         private Entities db = new Entities();
 
         // GET: ClientTickets
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Index(string attractionNameSearch, int? ticketTypeSearch, DateTime? dateSearch,int? isActiveSearch,int? wasPaidSearch)
         {
             ViewBag.searchDate = dateSearch;
@@ -106,6 +107,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientTickets/Details/5
+        [Authorize(Roles = "Admin,Manager,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -121,6 +123,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientTickets/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             ViewBag.IdWristband = new SelectList(db.Wristband, "Id", "Id");
@@ -148,6 +151,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientTickets/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -183,6 +187,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: ClientTickets/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -221,7 +226,7 @@ namespace Aquapark.Controllers
 
 
 
-
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult CreateTicket(int? id)
         {
             if (id == null)
@@ -296,6 +301,7 @@ namespace Aquapark.Controllers
 
 
         // GET: ClientTickets
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult IndexWristband(int? id)
         {
             if (id == null)
@@ -312,6 +318,7 @@ namespace Aquapark.Controllers
 
 
         // GET: ClientTickets/TicketsForTicketType
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult TicketsForTicketType(int? id)
         {
             var clientTicket = db.ClientTicket.Include(c => c.Wristband).Include(c => c.TicketInPriceList).Where(n => n.IdTicketInPriceList == id);
@@ -320,6 +327,7 @@ namespace Aquapark.Controllers
 
 
         // id - idWristband
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult GetTicketsOnWristband(int? id)
         {
 
@@ -345,11 +353,7 @@ namespace Aquapark.Controllers
             return View(clientTickets.ToList());
         }
 
-
-
-
-
-
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult GetTicketsToPay(int? id)
         {
 
@@ -377,7 +381,7 @@ namespace Aquapark.Controllers
             return View(clientTickets.ToList());
         }
 
-
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult PayTickets(int? id)
         {
             if (id == null)
@@ -402,6 +406,7 @@ namespace Aquapark.Controllers
             return RedirectToAction("GetTicketsOnWristband",new { id = id });
         }
 
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult ReturnWristband(int? id)
         {
             if (id == null)

@@ -70,7 +70,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Wristbands/Details/5
-        [Authorize(Roles = "Admin,SuperManager")]
+        [Authorize(Roles = "Admin,Employee,Manager,SuperManager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -95,7 +95,6 @@ namespace Aquapark.Controllers
         // POST: Wristbands/Create
         // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin,SuperManager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,IsActive,IsUsed")] Wristband wristband)
@@ -143,7 +142,7 @@ namespace Aquapark.Controllers
         }
 
         // GET: Wristbands/Delete/5
-        [Authorize(Roles = "Admin,SuperManager")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -159,7 +158,6 @@ namespace Aquapark.Controllers
         }
 
         // POST: Wristbands/Delete/5
-        [Authorize(Roles = "Admin,SuperManager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
