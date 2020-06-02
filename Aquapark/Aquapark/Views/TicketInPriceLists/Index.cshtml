@@ -4,36 +4,35 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Pricelist</h2>
-<br />
+<h2>Index</h2>
 @{
     if (User.IsInRole("Admin") || User.IsInRole("SuperManager"))
     {
         <p>
-            @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-success btn-lg" })
+            @Html.ActionLink("Create New", "Create")
         </p>
     }
 }
-<br />
+
 @{
     <div>
-        <text>Find by ticket name: </text>@Html.TextBox("ticketNameSearch")
-        <text>Find by attraction name: </text>@Html.TextBox("attractionNameSearch")
-        <text>Find by age group: </text>@Html.DropDownList("AgeGroupList", "All")
-        <text>Find by max price: </text><input type="number" id="priceSearch" name="priceSearch" value="@ViewBag.priceSearch" />
-        <text>Find by ticket type: </text>@Html.DropDownList("ticketTypeSearchList", "All")
+        <text>Find by ticket name:</text>@Html.TextBox("ticketNameSearch")
+        <text>Find by attraction name:</text>@Html.TextBox("attractionNameSearch")
+        <text>Find by age group</text>@Html.DropDownList("AgeGroupList", "All")
+        <text>Find by max price</text><input type="number" id="priceSearch" name="priceSearch" value="@ViewBag.priceSearch" />
+        <text>Find by ticket type</text>@Html.DropDownList("ticketTypeSearchList", "All")
 
 
         @{
             if (User.IsInRole("Admin") || User.IsInRole("SuperManager") || User.IsInRole("Manager"))
             {
-                <text>Find by date: </text><input type="datetime" name="searchDate" id="searchDate" value="@ViewBag.searchDate" />
+                <text>Find by date</text><input type="datetime" name="searchDate" id="searchDate" value="@ViewBag.searchDate" />
             }
         }
     </div>
 }
 
-<br />
+
 <table class="table" id="resultsTable">
     <tr>
         <th>
@@ -107,38 +106,29 @@
             @{
                 if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                    @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Update", "Update", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 }
                 else if (User.IsInRole("SuperManager"))
                 {
-                    @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Update", "Update", new { id = item.Id })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
                 }
                 else
                 {
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id })
                 }
             }
         </td>
             <td>
-                @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, null)
             </td>
         </tr>
     }
 
 </table>
-
-<style>
-    .btn-outline-primary {
-        color: #007bff;
-        border-color: #007bff;
-        margin: 2px;
-        width: 100%;
-    }
-</style>
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script>

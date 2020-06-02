@@ -4,29 +4,26 @@
     ViewBag.Title = "Index";
 }
 
-<br />
-<h2>List of wristbands</h2>
+<h2>Index</h2>
 @{
     if (User.IsInRole("Admin") || User.IsInRole("SuperManager"))
     {
         <p>
-            @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-success btn-lg" })
+            @Html.ActionLink("Create New", "Create")
         </p>
     }
 }
-<br />
 <div>
     @{
         if (User.IsInRole("Admin") || User.IsInRole("SuperManager") || User.IsInRole("Manager"))
 
         {
-            <text>Find by activity: </text>@Html.DropDownList("isActiveSearchList", "Active")
+            <text>Find by activity:</text>@Html.DropDownList("isActiveSearchList", "Active")
         }
     }
     Find by used: @Html.DropDownList("isUsedSearchList", "All")
 </div>
 
-<br />
 
 <table class="table" id="resultsTable">
     <tr>
@@ -58,23 +55,23 @@
                 @{
                     if (User.IsInRole("Admin"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     }
                     if (User.IsInRole("SuperManager"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
                     }
                     if (User.IsInRole("Manager"))
                     {
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
                     }
                 }
-                @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
-                @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
-                @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, null) |
+                @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, null) |
+                @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-success" })
             </td>
         </tr>
     }

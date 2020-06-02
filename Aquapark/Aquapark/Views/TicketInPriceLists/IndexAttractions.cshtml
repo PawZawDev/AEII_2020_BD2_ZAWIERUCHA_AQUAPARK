@@ -4,18 +4,18 @@
     ViewBag.Title = "Attraction index";
 }
 
-<h2>Pricelist of attraction</h2>
-<br />
+<h2>Index</h2>
+
 @{
     if (User.IsInRole("Admin") || User.IsInRole("SuperManager"))
     {
-    <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success btn-lg" })
-    </p>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
     }
 }
 
-<br />
+
 <table class="table" id="resultsTable">
     <tr>
         <th>
@@ -48,56 +48,56 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Attraction.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.TicketType.Type)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Entries)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Duration)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.StartDate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EndDate)
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Attraction.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketType.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entries)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
 
-    <td>
-        @{
-            if (User.IsInRole("Admin"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
-            }
-            else if (User.IsInRole("SuperManager"))
-            {
-                @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-            }
-            else
-            {
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-            }
-        }
-    </td>
-    <td>
-        @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
-    </td>
-</tr>
+            <td>
+                @{
+                    if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Update", "Update", new { id = item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    }
+                    else if (User.IsInRole("SuperManager"))
+                    {
+                        @Html.ActionLink("Update", "Update", new { id = item.Id })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, null)
+            </td>
+        </tr>
     }
 
 </table>
