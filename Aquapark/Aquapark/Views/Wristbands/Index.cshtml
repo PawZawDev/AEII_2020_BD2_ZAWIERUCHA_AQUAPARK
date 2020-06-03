@@ -72,6 +72,8 @@
                         @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
                     }
                 }
+            </td>
+            <td>
                 @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
                 @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
                 @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-success" })
