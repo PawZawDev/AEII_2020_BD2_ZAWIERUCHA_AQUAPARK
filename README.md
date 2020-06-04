@@ -54,6 +54,8 @@ Aby zarejestrować zwrócenie opaski należy:
 - w zakładce "Wristbands" wybrać opcję "Return Wristband" przy właściwej opasce
 ![Screen](documentation/return_wristband.png)
 
+Jeżeli na opasce znajdują się nieopłacone bilety zostaniemy przekierowani do strony płatności.
+
 Aby sprzedać nowy bilet należy:
 - w zakładce "Wristbands" wybrać opcję "Create Ticket" przy właściwej opasce
 ![Screen](documentation/create_ticket.png)
@@ -109,7 +111,7 @@ Aby edytować atrakcję należy:
 ![Screen](documentation/edit_attraction.png)
 
 Aby edytować cennik należy:
-- w zakładce "PriceList" wybrać opcję "Edit" przy odpowiedniej pozycji
+- w zakładce "PriceList" wybrać opcję "Update" przy odpowiedniej pozycji
 ![Screen](documentation/supermanager_pricelist.png)
 - dokonać zmian i wybrać opcję "Save"
 ![Screen](documentation/edit_pricelist.png)
