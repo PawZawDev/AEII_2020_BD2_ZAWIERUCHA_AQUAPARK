@@ -4,11 +4,28 @@ Projekt na bazy danych 2 - System wspomagający pracę aquaparku
 # Spis Treści
 #### [Opis Projektu](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#polecenie)
 #### [Instrukcja Użytkowania](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#instrukcja-u%C5%BCytkowania)
-- [Employee](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#employee)
-  -
-- [Manager](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#manager)
-- [SuperManager](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#supermanager)
-- [Admin](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#admin)
+1. [Employee](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#employee)
+
+   - [Realizacja płatności za bilety](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#realizacja-p%C5%82atno%C5%9Bci-za-bilety)
+   - [Rejestrowanie zwrotu opaski](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#rejestrowanie-zwrotu-opaski)
+   - [Sprzedanie biletu](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#sprzedanie-biletu)   
+2. [Manager](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#manager)
+
+   - [Oglądanie raportu](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#ogl%C4%85danie-raportu)   
+3. [SuperManager](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#supermanager)
+
+   - [Edycja opaski](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#edycja-opaski) 
+   - [Tworzenie opaski](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#tworzenie-opaski)  
+   - [Edycja atrakcji](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#edycja-atrakcji)  
+   - [Edycja cennika](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#edycja-cennika)  
+   - [Nowa pozycja w cenniku](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#nowa-pozycja-w-cenniku)  
+   - [Symulacja przejścia klienta przez bramkę](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#symulacja-przej%C5%9Bcia-klienta-przez-bramk%C4%99)  
+   - [Edycja bramki](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#edycja-bramki)  
+   - [Dodanie bramki](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#dodanie-bramki)  
+4. [Admin](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#admin)
+
+   - [Usuwanie lub edytowanie danych](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#usuwanie-lub-edytowanie-danych)
+   - [Zarządzanie użytkownikami](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#zarz%C4%85dzanie-u%C5%BCytkownikami)  
 
 ## Polecenie:
 ![Screen](documentation/Polecenie.jpg)
