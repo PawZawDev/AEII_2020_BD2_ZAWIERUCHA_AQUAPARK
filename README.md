@@ -43,14 +43,6 @@ Projekt na bazy danych 2 - System wspomagający pracę aquaparku
 
 ![Screen](documentation/UseCase.jpg)
 
-## Przykładowe ekrany aplikacji:
-
-![Screen](documentation/Landing.png)
-![Screen](documentation/Login.png)
-![Screen](documentation/Wristbands.png)
-
-
-
 ## Instrukcja Użytkowania
 
 Aby korzystać z funkcji strony należy się zalogować do odpowiedniego konta.
