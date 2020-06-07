@@ -6,49 +6,62 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                <text data-toggle="popover" data-trigger="hover" title="Shows whether wristband is currently available for clients">
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </text>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsUsed)
+                <text data-toggle="popover" data-trigger="hover" title="Shows whether wristband is currently used by a client">
+                    @Html.DisplayNameFor(model => model.IsUsed)
+                </text>
             </th>
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsUsed)
-                </td>
-                <td>
-                    @{
-                        if (User.IsInRole("Admin"))
-                        {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
-                        }
-                        if (User.IsInRole("SuperManager"))
-                        {
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                        }
-                        if (User.IsInRole("Manager"))
-                        {
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                        }
-                    }
-                    @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
-                    @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
-                    @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-success" })
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsUsed)
+        </td>
+        <td>
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                }
+                if (User.IsInRole("SuperManager"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                }
+                if (User.IsInRole("Manager"))
+                {
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                }
+            }
+        </td>
+        <td>
+            <text data-toggle="popover" data-trigger="hover" title="Show tickets connected to this wristband">
+                @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+            </text>
+            <text data-toggle="popover" data-trigger="hover" title="Marks wristband as not used
+If it has unpaid tickets goes to payment">
+                @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-danger-small" })
+            </text>
+            <text data-toggle="popover" data-trigger="hover" title="Create a new ticket for this wristband">
+                @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+            </text>
+        </td>
+    </tr>
         }
 
     </table>

@@ -10,7 +10,9 @@
     if (User.IsInRole("Admin") || User.IsInRole("SuperManager"))
     {
         <p>
-            @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-success btn-lg" })
+            <div data-toggle="popover" data-trigger="hover" title="Adds new wristband">
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success btn-lg" })
+            </div>
         </p>
     }
 }
@@ -34,10 +36,14 @@
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsActive)
+            <text data-toggle="popover" data-trigger="hover" title="Shows whether wristband is currently available for clients">
+                @Html.DisplayNameFor(model => model.IsActive)
+                </text>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsUsed)
+            <text data-toggle="popover" data-trigger="hover" title="Shows whether wristband is currently used by a client">
+                @Html.DisplayNameFor(model => model.IsUsed)
+                </text>
         </th>
         <th></th>
     </tr>
@@ -74,9 +80,16 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
-                @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
-                @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                <text data-toggle="popover" data-trigger="hover" title="Show tickets connected to this wristband">
+                    @Html.ActionLink("Get Tickets", "GetTicketsOnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                </text>
+                <text data-toggle="popover" data-trigger="hover" title="Marks wristband as not used
+If it has unpaid tickets goes to payment">
+                    @Html.ActionLink("Return Wristband", "ReturnWristband", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-danger-small" })
+                </text>
+                <text data-toggle="popover" data-trigger="hover" title="Create a new ticket for this wristband">
+                    @Html.ActionLink("Create Ticket", "CreateTicket", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-success" })
+                </text>
             </td>
         </tr>
     }
@@ -95,3 +108,31 @@
         });
     });
 </script>
+<style>
+    .btn-outline-info {
+        color: #17a2b8;
+        border-color: #17a2b8;
+        margin: 2px;
+        width: 100%;
+    }
+
+    .btn-outline-warning {
+        color: #ffc107;
+        border-color: #ffc107;
+        margin: 2px;
+        width: 100%;
+    }
+
+    .btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+        margin: 2px;
+        width: 100%;
+    }
+    .btn-outline-danger-small {
+        color: #dc3545;
+        border-color: #dc3545;
+        margin: 2px;
+        width: 30%;
+    }
+</style>

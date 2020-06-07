@@ -33,7 +33,7 @@
                     if (User.IsInRole("SuperManager"))
                     {
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
                     }
                     if (User.IsInRole("Manager"))
                     {
@@ -42,7 +42,9 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Show ticket types for attraction", "TicketsForAttraction", "TicketInPriceLists", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                <text data-toggle="popover" data-trigger="hover" title="Shows currently available tickets for this attraction">
+                    @Html.ActionLink("Show ticket types for attraction", "TicketsForAttraction", "TicketInPriceLists", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                </text>
             </td>
             </tr>
         }

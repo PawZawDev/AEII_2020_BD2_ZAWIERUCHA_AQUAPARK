@@ -16,7 +16,9 @@
     if (User.IsInRole("Admin") || User.IsInRole("SuperManager"))
     {
         <p>
-            @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-success btn-lg" })
+            <div data-toggle="popover" data-trigger="hover" title="Adds new entry gate">
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success btn-lg" })
+            </div>
         </p>
     }
 }
