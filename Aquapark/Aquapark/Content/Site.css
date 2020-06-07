@@ -135,7 +135,7 @@ textarea {
     color: #17a2b8;
     border-color: #17a2b8;
     margin: 2px;
-    width: 30%;
+    width: 100px;
 }
 
     .btn-outline-info:hover {
@@ -169,7 +169,7 @@ textarea {
     color: #ffc107;
     border-color: #ffc107;
     margin: 2px;
-    width: 30%;
+    width: 100px;
 }
 
     .btn-outline-warning:hover {
@@ -203,7 +203,7 @@ textarea {
     color: #dc3545;
     border-color: #dc3545;
     margin: 2px;
-    width: 30%;
+    width: 100px;
 }
 
     .btn-outline-danger:hover {

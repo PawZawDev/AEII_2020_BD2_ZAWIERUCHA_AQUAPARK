@@ -77,63 +77,56 @@
             </td>
 
             <td>
+
                 @{
                     if (User.IsInRole("Admin"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                        <div data-toggle="popover" data-trigger="hover" title="Creates new ticket and deactivates the old one">
-                            @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                        </div>
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
+                            <text data-toggle="popover" data-trigger="hover" title="Creates new ticket and deactivates the old one">
+                                @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
+                            </text>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-outline-danger" })
+                            <text data-toggle="popover" data-trigger="hover" title="Shows tickets of this type sold to clients">
+                                @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                            </text>
+                        </p>
                     }
                     else if (User.IsInRole("SuperManager"))
                     {
-                        <div data-toggle="popover" data-trigger="hover" title="Creates new ticket and deactivates the old one">
-                            @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
-                        </div>
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                        <p>
+                            <text data-toggle="popover" data-trigger="hover" title="Creates new ticket and deactivates the old one">
+                                @Html.ActionLink("Update", "Update", new { id = item.Id }, new { @class = "btn btn-outline-warning" })
+                            </text>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                            <text data-toggle="popover" data-trigger="hover" title="Shows tickets of this type sold to clients">
+                                @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                            </text>
+                        </p>
                     }
                     else
                     {
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                        <p>
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-info" })
+                            <text data-toggle="popover" data-trigger="hover" title="Shows tickets of this type sold to clients">
+                                @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
+                            </text>
+                        </p>
+
                     }
                 }
-            </td>
-            <td>
-                <text data-toggle="popover" data-trigger="hover" title="Shows tickets of this type sold to clients">
-                    @Html.ActionLink("Show tickets for ticket type", "TicketsForTicketType", "ClientTickets", new { id = item.Id }, new { @class = "btn btn-outline-primary" })
-                </text>
+
             </td>
         </tr>
     }
 </table>
+
 <style>
     .btn-outline-primary {
         color: #007bff;
         border-color: #007bff;
         margin: 2px;
-        width: 100%;
-    }
-
-    .btn-outline-info {
-        color: #17a2b8;
-        border-color: #17a2b8;
-        margin: 2px;
-        width: 100%;
-    }
-
-    .btn-outline-warning {
-        color: #ffc107;
-        border-color: #ffc107;
-        margin: 2px;
-        width: 100%;
-    }
-
-    .btn-outline-danger {
-        color: #dc3545;
-        border-color: #dc3545;
-        margin: 2px;
-        width: 100%;
+        width: 208px;
     }
 </style>
