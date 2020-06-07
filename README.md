@@ -1,6 +1,13 @@
 ﻿# AEII_2020_BD2_ZAWIERUCHA_AQUAPARK
 Projekt na bazy danych 2 - System wspomagający pracę aquaparku
 
+# Spis Treści
+#### [Opis Projektu](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#polecenie)
+#### [Instrukcja Użytkowania](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#instrukcja-u%C5%BCytkowania)
+- [Employee](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#employee)
+- [Manager](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#manager)
+- [SuperManager](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#supermanager)
+- [Admin](https://github.com/PawZawDev/AEII_2020_BD2_ZAWIERUCHA_AQUAPARK/blob/master/README.md#admin)
 
 ## Polecenie:
 ![Screen](documentation/Polecenie.jpg)
